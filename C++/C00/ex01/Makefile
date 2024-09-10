@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRC = PhoneBook.cpp function.cpp main.cpp Contact.cpp
 
-OBJS = ${SRC:.c=.o}
+OBJS = ${SRC:.cpp=.o}
 
 all: ${NAME}
 

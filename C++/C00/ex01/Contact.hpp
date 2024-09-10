@@ -7,14 +7,21 @@
 
 class Contact
 {
-    public:
+    private:
         std::string first_name; 
         std::string last_name;
-        std::string nickname;
+        std::string nick_name;
         std::string phone_num;
         std::string secret;
     public:
-        void    set_members();
+        void    set_first_name();
+        void    set_last_name();
+        void    set_nick_name();
+        void    set_phone_num();
+        void    set_secret();
+        std::string get_first_name();
+
+
 };
 
 #endif

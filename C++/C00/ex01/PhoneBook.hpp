@@ -7,20 +7,23 @@
 
 class PhoneBook
 {
-    public:
+    private:
 		int	all_count_of_contacts;
-        Contact obj[8];
+        Contact obj[3];
     public:
+    	PhoneBook();
+    	~PhoneBook();
 		void    get_all_contact();
+		void    set_members(int i);
 };
 
 int		check_only_letter(std::string str);
 int		check_only_digit(std::string str);
-void	check_first_name(std::string first_name);
-void	check_last_name(std::string last_name);
-void	check_nickname(std::string nickname);
-void	check_phone_num(std::string phone_num);
-void	check_secret(std::string secret);
+std::string	check_first_name(std::string first_name);
+std::string	check_last_name(std::string last_name);
+std::string	check_nickname(std::string nickname);
+std::string	check_phone_num(std::string phone_num);
+std::string	check_secret(std::string secret);
 int		len_contact_member(std::string str);
 
 #endif
