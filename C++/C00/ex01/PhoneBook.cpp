@@ -1,5 +1,5 @@
 #include <iostream>
-#include "phonebook.hpp"
+#include "PhoneBook.hpp"
 // #include "contact.hpp"
 
 PhoneBook::PhoneBook()
@@ -22,15 +22,4 @@ int len_contact_member(std::string str)
 	}
 	else
 		
-}
-
-void    PhoneBook::get_all_contact()
-{
-    int i = 0;
-    while (i < this->all_count_of_contacts)
-    {
-        std::cout << "_____________" << std::endl;
-        std::cout << "|         " << i << "|";
-        len_contact_member(this->obj[i].first_name);
-    }
 }

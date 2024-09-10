@@ -4,13 +4,13 @@ CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = phonebook.cpp implement.cpp function.cpp main.cpp
+SRC = PhoneBook.cpp function.cpp main.cpp Contact.cpp
 
 OBJS = ${SRC:.c=.o}
 
 all: ${NAME}
 
-${NAME}: ${OBJS} Makefile phonebook.hpp contact.hpp
+${NAME}: ${OBJS} Makefile PhoneBook.hpp Contact.hpp
 	${CC} ${FLAGS} ${OBJS} -o ${NAME}
 
 bonus: ${NAME_BONUS}
