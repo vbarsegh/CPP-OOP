@@ -19,7 +19,7 @@ int len_contact_member(std::string str)
     int	len = str.length();
 	if (len > 10)
 	{
-		std::cout << str.substr(0, 8) << ".";
+		std::cout << str.substr(0, 9) << ".";
 	}
     else
     {
@@ -41,10 +41,12 @@ void    PhoneBook::get_all_contact()
     while (i < this->all_count_of_contacts)
     {
         std::cout << "---------------------------------------------" << std::endl;
-        std::cout << "|        " << i << "|";
-        len_contact_member(get_first_name(i));//geterner pti grvi
-        len_contact_member(this->obj[i].last_name);
-        len_contact_member(this->obj[i].nick_name);
+        // std::cout << "|        " << i << "|";
+		std::cout << "|";
+		std::cout << std::setw(10) << i << "|";
+        len_contact_member(this->obj[i].get_first_name());//geterner pti grvi
+        len_contact_member(this->obj[i].get_last_name());
+        len_contact_member(this->obj[i].get_nick_name());
         i++;
         std::cout << std::endl;
     }

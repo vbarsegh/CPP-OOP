@@ -13,7 +13,7 @@ void    PhoneBook::set_members(int i)
     this->obj[i].set_nick_name();
     this->obj[i].set_phone_num();
     this->obj[i].set_secret();
-	if (this->all_count_of_contacts < 2)
+	if (this->all_count_of_contacts < 3)
                 this->all_count_of_contacts++;
     // std::cout << "nickname = ";
     // getline(std::cin, this->nick_name);
@@ -71,7 +71,27 @@ void    Contact::set_secret()
     this->secret = secret;
 }
 
-std::string	Contact::get_first_name(int i)
+std::string	Contact::get_first_name()
 {
-	return (this[i].first_name);
+	return (this->first_name);
+}
+
+std::string	Contact::get_last_name()
+{
+	return (this->last_name);
+}
+
+std::string	Contact::get_nick_name()
+{
+	return (this->nick_name);
+}
+
+std::string	Contact::get_phone_num()
+{
+	return (this->phone_num);
+}
+
+std::string	Contact::get_secret()
+{
+	return (this->secret);
 }

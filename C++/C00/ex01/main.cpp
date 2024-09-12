@@ -12,7 +12,7 @@ int main()
         std::getline(std::cin, str_in);
         if (str_in == "ADD")
         {
-            if (i == 2)
+            if (i == 3)
             	i = 0;
             user.set_members(i);
             i++;
