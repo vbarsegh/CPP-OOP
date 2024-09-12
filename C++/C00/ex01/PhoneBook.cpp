@@ -4,13 +4,13 @@
 
 PhoneBook::PhoneBook()
 {
-    std::cout << "Constructor of PhoneBook called" << std::endl;
+    // std::cout << "Constructor of PhoneBook called" << std::endl;
     all_count_of_contacts = 0;
 }
 
 PhoneBook::~PhoneBook()
 {
-    std::cout << "Destructor of PhoneBook called" << std::endl;
+    // std::cout << "Destructor of PhoneBook called" << std::endl;
 }
 
 
@@ -41,15 +41,46 @@ void    PhoneBook::get_all_contact()
     while (i < this->all_count_of_contacts)
     {
         std::cout << "---------------------------------------------" << std::endl;
-        // std::cout << "|        " << i << "|";
 		std::cout << "|";
 		std::cout << std::setw(10) << i << "|";
-        len_contact_member(this->obj[i].get_first_name());//geterner pti grvi
+        len_contact_member(this->obj[i].get_first_name());
         len_contact_member(this->obj[i].get_last_name());
         len_contact_member(this->obj[i].get_nick_name());
         i++;
         std::cout << std::endl;
     }
-    std::cout << "---------------------------------------------" << std::endl;
-
+    if (all_count_of_contacts != 0)
+    {
+        std::cout << "---------------------------------------------" << std::endl;
+        std::cout << "Please say what index qez khetaqrqreg@ -> ";
+	    std::cin >> i;
+    
+        if (i >= 0 && i < all_count_of_contacts)
+        {
+            std::cout << i << std::endl;
+            std::cout << this->obj[i].get_first_name() << std::endl;
+            std::cout << this->obj[i].get_last_name() << std::endl;
+            std::cout << this->obj[i].get_nick_name() << std::endl;
+            std::cout << this->obj[i].get_phone_num() << std::endl;
+            std::cout << this->obj[i].get_secret() << std::endl;
+        }
+        else
+        {
+            while (i < 0 || i >= all_count_of_contacts)
+            {
+                std::cout << "Please say what (correct) index qez khetaqrqreg@ -> ";
+                std::cin >> i;
+            }
+            std::cout << i << std::endl;
+            std::cout << this->obj[i].get_first_name() << std::endl;
+            std::cout << this->obj[i].get_last_name() << std::endl;
+            std::cout << this->obj[i].get_nick_name() << std::endl;
+            std::cout << this->obj[i].get_phone_num() << std::endl;
+            std::cout << this->obj[i].get_secret() << std::endl;
+        }
+    }
+    else
+	{
+		std::cout << "You don't have any contact right now" << std::endl;
+	}
 }
