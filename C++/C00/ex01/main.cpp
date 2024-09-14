@@ -12,12 +12,11 @@ int main()
     std::cout << "Please enter the command you need" << std::endl;
     while (1)
     {
+        if (!str_in.empty())
+            std::cout << "Please enter the command you neeEEEEEd" << std::endl;
         std::getline(std::cin, str_in);
         if (std::cin.eof())
             break;
-        if (!str_in.empty())
-        {
-            std::cout << "Please enter the command you need" << std::endl;
             if (str_in == "ADD")
             {
                 if (i == 3)
@@ -29,9 +28,6 @@ int main()
                 user.get_all_contact();
             else if (str_in == "EXIT")
                 exit (0);
-            else
-                std::cout << "Wrong input !!!" << std::endl;
-        }
     }
     
 }

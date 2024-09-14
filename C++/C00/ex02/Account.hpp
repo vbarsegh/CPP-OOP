@@ -41,17 +41,17 @@ public:
 
 private:
 
-	static int	_nbAccounts;
-	static int	_totalAmount;
-	static int	_totalNbDeposits;
-	static int	_totalNbWithdrawals;
+	static int	_nbAccounts;//qani akaunt unenq es pahin
+	static int	_totalAmount;//verjnakan qanaki vichakna,kaxvac gorcarqneric
+	static int	_totalNbDeposits;//henc mihat gircarq exav esi ++enq anum
+	static int	_totalNbWithdrawals;//henc mihat gircarq exav esi ++enq anum
 
 	static void	_displayTimestamp( void );
 
-	int				_accountIndex;
-	int				_amount;
-	int				_nbDeposits;
-	int				_nbWithdrawals;
+	int				_accountIndex;//indexavorum enq accountmery
+	int				_amount;//hashvi vra exac gumari qanaky orinak
+	int				_nbDeposits;//skzbic 0 a vortev gorcarq der chi exel
+	int				_nbWithdrawals;//skzbic 0 a vortev gorcarq der chi exel
 
 	Account( void );
 
