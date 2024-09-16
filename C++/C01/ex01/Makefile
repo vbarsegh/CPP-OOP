@@ -1,4 +1,4 @@
-NAME = Moarbrainz!
+NAME = Moarbrainz
 
 CC = c++
 

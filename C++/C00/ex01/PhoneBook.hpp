@@ -16,6 +16,7 @@ class PhoneBook
     	~PhoneBook();
 		void    get_all_contact();
 		void    set_members(int i);
+		void	my_cout(int ind);
 };
 
 int		check_only_letter(std::string str);
