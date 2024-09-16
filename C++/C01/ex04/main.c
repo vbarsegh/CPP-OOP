@@ -11,8 +11,11 @@ char* ft_strdup(const char* s)
 	int		i;
 
 	i = 0;
-    int length = sizeof(s) / sizeof(s[0]); 
+    int length = (sizeof(s) / sizeof(s[0])); 
     printf("lenght = %d\n", length);
+	for (int i = 0; i < (sizeof(s) / sizeof(s[0])); i++) {
+        printf("@%c", s[i]); // Выводим как целое число
+    }
 	arr = (char*)malloc(sizeof(char) * (length + 1));
 	if (!arr)
 		return (NULL);
@@ -115,16 +118,17 @@ char* ft_substr(char const* s, unsigned int start, size_t len)
 	unsigned int	j;
 	char* arr;
     int length = sizeof(s) / sizeof(s[0]);
-    printf("vax=%d\n", length);
 	j = 0;
 	if (!s)
 		return (NULL);
+    printf("vax=%d\n", length);
 	if (length < len + start)
 		i = length - start + 1;
 	else
 		i = len + 1;
 	if (start >= length)
 		i = 1;
+	printf("i ===== %d\n", i);
 	arr = (char *)malloc(sizeof(char) * i);
 	if (!arr)
 		return (NULL);
@@ -134,33 +138,41 @@ char* ft_substr(char const* s, unsigned int start, size_t len)
 		j++;
 	}
 	arr[j] = '\0';
+	 printf("j= %d\n", j);
+	printf("ba ste -> %lu\n", sizeof(arr) / sizeof(arr[0]));
+	
 	return (arr);
 }
 
-char *mul_01(char *Ro)
+char *mul_01(char *_R)
 {
-    int arr[1] = {Ro[2]};
-	char* s1 = ft_substr(Ro, 2, 4);
-	char* s2 = ft_substr(Ro, 2, 4);
+    // int arr[1] = {Ro[2]};
+	// char* s1 = ft_substr(Ro, 2, 4);
+	// char* s2 = ft_substr(Ro, 2, 4);
  /*   printf("s1=   ");
     for (int i = 0; i < 4; i++) {
         printf("%d", Ro[i]); // Выводим как целое число
     }*/
+	printf("ekac _R ");
+	for (int i = 0; i < 4; i++) 
+        printf("%d", _R[i]);
+	printf("sizeof = %lu\n", sizeof(_R));
 	char* res;
-	int	num1 = atoi(s1);
-	int num2 = atoi(s2);/////ste pti dzvi es mulna sxal
-	int res_num = num1 * num2;
-//	res = bitset<32>(res_num).to_string();
-	res = ft_itoa(res_num);
-	if (sizeof(Ro) / sizeof(Ro[0]) < 8)
-	{
-		int i = sizeof(Ro) / sizeof(Ro[0]);
-		while (i < 8)
-		{
-			res[i] = 0;
-			i++;
-		}
-	}
+	int	decimal1 = strtol(_R, NULL, 2);;
+	int decimal2 = strtol(_R, NULL, 2);/////ste pti dzvi es mulna sxal
+	printf("dec = %d\n", decimal1);
+// 	int res_num = num1 * num2;
+// //	res = bitset<32>(res_num).to_string();
+// 	res = ft_itoa(res_num);
+// 	if (sizeof(Ro) / sizeof(Ro[0]) < 8)
+// 	{
+// 		int i = sizeof(Ro) / sizeof(Ro[0]);
+// 		while (i < 8)
+// 		{
+// 			res[i] = 0;
+// 			i++;
+// 		}
+// 	}
 	return (res);
 }
 
@@ -169,7 +181,8 @@ char *mul_01(char *Ro)
 int main()
 {
 	static int i = 0;
-	char	input_str[8] = {0,1,1,1,0,0,1,0};
+	// char	*input_str[8] = {0,1,1,1,0,0,1,0};
+	char	*input_str = ft_strdup("01110010");
 	//char *input_str = (char *)malloc(sizeof(char) * 8);
 	//printf("input_str -> ");
 	//scanf("input_str -> %s" ,input_str);
@@ -185,15 +198,15 @@ int main()
 	}*/
 	//cout << "hmm = " << input_str;
     printf("input = ");
-	 for (int i = 0; i < 8; i++) {
+	 for (int i = 0; i < (sizeof(input_str) / sizeof(input_str[0])); i++) {
         printf("%d", input_str[i]); // Выводим как целое число
     }
     printf("\n");
 
 	char *Ro = ft_strdup(input_str);
     printf("dupic heto Ro ->");
-	 for (int i = 0; i < 8; i++) {
-        printf("%d", Ro[i]); // Выводим как целое число
+	 for (int i = 0; i < (sizeof(Ro) / sizeof(Ro[0])); i++) {
+        printf("!%c", Ro[i]); // Выводим как целое число
     }
     printf("\n");
 	char *_R;
@@ -204,11 +217,12 @@ int main()
 		//_R = Ro.substr(2, 6);
 		_R = ft_substr(Ro, 2, 4);
         printf("_r -> ");
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < (sizeof(_R) / sizeof(_R[0])); i++)
         {
-             printf("%d", _R[i]); // Выводим как целое число
+             printf("^%d", _R[i]); // Выводим как целое число
         }
         printf("\n");
+		printf("groxy tani %lu\n", sizeof(_R));
 		Ro = mul_01(_R);
 		printf("hly vor senc ->");
         for (int i = 0; i < 8; i++) {
