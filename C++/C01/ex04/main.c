@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 
 
 char* ft_strdup(const char* s)
@@ -11,11 +11,11 @@ char* ft_strdup(const char* s)
 	int		i;
 
 	i = 0;
-    int length = (sizeof(s) / sizeof(s[0])); 
-    printf("lenght = %d\n", length);
-	for (int i = 0; i < (sizeof(s) / sizeof(s[0])); i++) {
-        printf("@%c", s[i]); // Выводим как целое число
-    }
+    int length = strlen(s); 
+    printf("lenghtttttt = %d\n", length);
+	// for (int i = 0; i < (sizeof(s) / sizeof(s[0])); i++) {
+    //     printf("@%c", s[i]); // Выводим как целое число
+    // }
 	arr = (char*)malloc(sizeof(char) * (length + 1));
 	if (!arr)
 		return (NULL);
@@ -28,17 +28,6 @@ char* ft_strdup(const char* s)
 	*(arr + i) = '\0';
 	return (arr);
 }
-/*t	ft_strlen(const char* s)
-{
-	int		i;
-	size_t	count;
-
-	count = 0;
-	i = 0;
-	while (s[i++] != '\0')
-		count++;
-	return (count);
-}*/
 char* foo(void)
 {
 	char* ptr;
@@ -117,7 +106,7 @@ char* ft_substr(char const* s, unsigned int start, size_t len)
 	unsigned int	i;
 	unsigned int	j;
 	char* arr;
-    int length = sizeof(s) / sizeof(s[0]);
+    int length = strlen(s);
 	j = 0;
 	if (!s)
 		return (NULL);
@@ -144,24 +133,94 @@ char* ft_substr(char const* s, unsigned int start, size_t len)
 	return (arr);
 }
 
+
+int func_len_binar_num(int res_num)
+{
+	int len = 0;
+	while (res_num)
+	{
+		res_num /= 2;
+		len++;
+	}
+	return (len);
+}
+
 char *mul_01(char *_R)
 {
-    // int arr[1] = {Ro[2]};
-	// char* s1 = ft_substr(Ro, 2, 4);
-	// char* s2 = ft_substr(Ro, 2, 4);
- /*   printf("s1=   ");
-    for (int i = 0; i < 4; i++) {
-        printf("%d", Ro[i]); // Выводим как целое число
-    }*/
 	printf("ekac _R ");
-	for (int i = 0; i < 4; i++) 
-        printf("%d", _R[i]);
-	printf("sizeof = %lu\n", sizeof(_R));
-	char* res;
+	for (int i = 0; i < strlen(_R); i++) 
+        printf("~%c", _R[i]);
+	printf("\n");
+	printf("sizeof = %lu\n",strlen(_R));
 	int	decimal1 = strtol(_R, NULL, 2);;
 	int decimal2 = strtol(_R, NULL, 2);/////ste pti dzvi es mulna sxal
 	printf("dec = %d\n", decimal1);
-// 	int res_num = num1 * num2;
+ 	int res_num = decimal1 * decimal2;
+	printf("res_num  = %d\n", res_num);
+
+	int	len_binar_num = func_len_binar_num(res_num);
+	char* res;
+	if (len_binar_num == 8)
+		res = (char *)malloc(sizeof(char) * (len_binar_num + 1));
+	else if (len_binar_num == 7)
+		res = (char *)malloc(sizeof(char) * (len_binar_num + 2));
+	printf("len binar  = %d\n", len_binar_num);
+
+	int i = 0;
+	int temp = len_binar_num;
+	if (temp == 7)
+	{
+
+		while (res_num >= 0)
+		{
+			if (res_num % 2 == 0 )
+				res[len_binar_num] = '0';
+			else
+				res[len_binar_num] = '1';
+			len_binar_num--;
+			if (res_num == 0)
+				break ;
+			res_num /= 2;
+			printf("res = %d\n", res_num);
+		}
+		printf("stex -> %d\n", len_binar_num);
+		printf("incha exe\n");
+		if (temp == 7)
+		{
+			res[temp + 1] = '\0';
+		}
+		else
+			res[temp] = '\0';
+	}
+	if (temp == 8)
+	{
+		printf("steenq\n");
+		while (res_num > 0)
+		{
+			if (res_num % 2 == 0 )
+				res[len_binar_num - 1] = '0';
+			else
+				res[len_binar_num - 1] = '1';
+			len_binar_num--;
+			if (res_num == 0)
+				break ;
+			res_num /= 2;
+			printf("res = %d\n", res_num);
+		}
+		printf("stex -> %d\n", len_binar_num);
+		printf("incha exe\n");
+		// if (temp == 7)
+		// {
+		// 	res[temp + 1] = '\0';
+		// }
+		// else
+			res[temp] = '\0';
+	}
+	printf("tesnenq    ");
+	for (int i = 0; i < strlen(res); i++)
+        printf("%c", res[i]);
+	return (res);
+	printf("binar len = %d\n", len_binar_num);
 // //	res = bitset<32>(res_num).to_string();
 // 	res = ft_itoa(res_num);
 // 	if (sizeof(Ro) / sizeof(Ro[0]) < 8)
@@ -173,7 +232,7 @@ char *mul_01(char *_R)
 // 			i++;
 // 		}
 // 	}
-	return (res);
+	// return (res);
 }
 
 
@@ -181,57 +240,44 @@ char *mul_01(char *_R)
 int main()
 {
 	static int i = 0;
-	// char	*input_str[8] = {0,1,1,1,0,0,1,0};
-	char	*input_str = ft_strdup("01110010");
-	//char *input_str = (char *)malloc(sizeof(char) * 8);
-	//printf("input_str -> ");
-	//scanf("input_str -> %s" ,input_str);
-	/*for (int j = 0; j < 8; j++)
-	{
-		input_str[j] = (char)input_int[j];
-	}
-	cout << "hmm = " << input_str[0] << endl;
-	
-	for (int j = 0; j < 8; j++)
-	{
-		cout << "e heto " << input_str[j] << " ";
-	}*/
-	//cout << "hmm = " << input_str;
-    printf("input = ");
-	 for (int i = 0; i < (sizeof(input_str) / sizeof(input_str[0])); i++) {
-        printf("%d", input_str[i]); // Выводим как целое число
-    }
-    printf("\n");
+	char	*input_str = ft_strdup("01110001");
+    // printf("input = ");
+	//  for (int i = 0; i < strlen(input_str); i++) {
+    //     printf("%c", input_str[i]); // Выводим как целое число
+    // }
+    // printf("\n");
 
 	char *Ro = ft_strdup(input_str);
-    printf("dupic heto Ro ->");
-	 for (int i = 0; i < (sizeof(Ro) / sizeof(Ro[0])); i++) {
-        printf("!%c", Ro[i]); // Выводим как целое число
-    }
-    printf("\n");
+	//     printf("dupic heto Ro ->");
+	//  for (int i = 0; i < strlen(Ro); i++) {
+    //     printf("%c", Ro[i]); // Выводим как целое число
+    // }
+    // printf("\n");
 	char *_R;
-	//cout << "hres" << input_str.capacity();
-	//std::cout << "check_4_value(input_str, Ro) =" << check_4_value(input_str, Ro, i) << endl;
 	if (check_4_value(input_str, Ro, i) != 1 && if_that_4_value_is_0(Ro) != 1)
 	{
-		//_R = Ro.substr(2, 6);
+	// 	printf("hrrrr    ");
+	// 	for (int i = 0; i < strlen(Ro); i++) {
+    //     printf("%c", Ro[i]); // Выводим как целое число
+    // }
+
 		_R = ft_substr(Ro, 2, 4);
         printf("_r -> ");
-        for (int i = 0; i < (sizeof(_R) / sizeof(_R[0])); i++)
+        for (int i = 0; i < strlen(_R); i++)
         {
-             printf("^%d", _R[i]); // Выводим как целое число
+             printf("^%c", _R[i]); // Выводим как целое число
         }
         printf("\n");
-		printf("groxy tani %lu\n", sizeof(_R));
+		// printf("groxy tani %lu\n", sizeof(_R));
 		Ro = mul_01(_R);
 		printf("hly vor senc ->");
-        for (int i = 0; i < 8; i++) {
-            printf("%d", Ro[i]); // Выводим как целое число
+        for (int i = 0; i < strlen(Ro); i++) {
+            printf("%c", Ro[i]); // Выводим как целое число
     }
 	}
     printf("tesnenq -> ");
-     for (int i = 0; i < 8; i++) {
-        printf("%d", Ro[i]); // Выводим как целое число
+     for (int i = 0; i < strlen(Ro); i++) {
+        printf("%c", Ro[i]); // Выводим как целое число
     }
 }
 
