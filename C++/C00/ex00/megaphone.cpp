@@ -1,14 +1,22 @@
 #include <iostream>
 #include <string.h>
 
-int main()
+int main(int argc, char **argv)
 {
-    std::string arr;
-    getline(std::cin, arr);
-
-    for (unsigned int i = 0; i < arr.length(); i++)
-        std::cout << (char)toupper(arr[i]);
+    if (argc == 1)
+    {
+        std::cout <<"* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+        return (1);
+    }
+    int i = 1;
+    // std::string arr;
+    // getline(std::cin, arr);
+    while (i < argc)
+    {
+        for (unsigned int j= 0; argv[i][j]; j++)
+            std::cout << (char)toupper(argv[i][j]);
+        i++;
+    }
     std::cout << std::endl;
-
     return (0);
 }
