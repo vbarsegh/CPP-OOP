@@ -21,8 +21,8 @@ std::string foo(std::string line, char *s1, char *s2)
 		if (ind == -1)
 			break ;
 		len_s1 = strlen(s1);
-		line.erase(ind, len_s1);
-		line.insert(ind, s2);
+		line.erase(ind, len_s1);//jnjuma
+		line.insert(ind, s2);//avelacnuma
 
 	}
 	return (line);
