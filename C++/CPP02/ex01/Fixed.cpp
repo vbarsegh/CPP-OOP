@@ -6,10 +6,20 @@ Fixed::Fixed()
     this->fixed_point_value = 0;
 }
 
+Fixed::Fixed(const int value) : fixed_point_value(value)
+{
+    std::cout << "ctor with integer param is called" << std::endl;
+}
+
+Fixed::Fixed(float	value) : fixed_point_value(value)
+{
+    std::cout << "ctor with float param is called" << std::endl;
+}
+
 Fixed::Fixed(const Fixed& other) : fixed_point_value(other.fixed_point_value)
 {
     std::cout << "copy ctor is called" << std::endl;
-    // *this = other;
+    // *this = other;//lav praktika chi
 }
 
 
