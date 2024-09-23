@@ -34,7 +34,7 @@ void Harl::error( void )
 
 void Harl::complain( std::string level )
 {
-	void (Harl::*ptr_d)() = &Harl::debug;
+	void (Harl::*ptr_d)() = this->debug();
 	void (Harl::*ptr_i)() = &Harl::info;
 	void (Harl::*ptr_w)() = &Harl::warning;
 	void (Harl::*ptr_e)() = &Harl::error;

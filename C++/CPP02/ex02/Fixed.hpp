@@ -20,6 +20,17 @@ public:
 	void setRawBits( int const raw );
     float toFloat( void ) const;
 	int toInt( void ) const;
+    bool operator>(const Fixed& other) const;
+    bool operator>=(const Fixed& other) const;
+    bool operator<(const Fixed& other) const;
+    bool operator<=(const Fixed& other) const;
+    bool operator==(const Fixed& other) const;
+    bool operator!=(const Fixed& other) const;
+    Fixed operator+(const Fixed& other) const;
+    Fixed operator-(const Fixed& other) const;
+    Fixed operator*(const Fixed& other) const;
+    Fixed operator/(const Fixed& other) const;
+
     ~Fixed();
 };
 
