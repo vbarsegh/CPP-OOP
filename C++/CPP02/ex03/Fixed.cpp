@@ -3,7 +3,7 @@
 Fixed::Fixed()
 {
     std::cout << "default ctor is called" << std::endl;
-    this->fixed_point_value = 0;
+    this->fixed_point_value = 100000000;
 }
 
 Fixed::Fixed(const int value)
@@ -186,19 +186,18 @@ Fixed Fixed::operator--(int)
 
 Fixed& Fixed::min(Fixed& f1, Fixed& f2)
 {
-    return (const_cast<Fixed&>(Fixed::min(static_cast<const Fixed&>(f1), static_cast<const Fixed&>(f2))));
-}
-const Fixed& Fixed::min(const Fixed& f1, const Fixed& f2)
-{
     return (f1 < f2 ? f1 : f2);
-    // return (Fixed::min(const_cast<Fixed&>(f1), const_cast<Fixed&>(f2)));
+}
+Fixed& Fixed::min(const Fixed& f1, const Fixed& f2)
+{
+    return (Fixed::min(const_cast<Fixed&>(f1), const_cast<Fixed&>(f2)));
 }
 
 Fixed& Fixed::max(Fixed& f1, Fixed& f2)
 {
-    return (const_cast<Fixed&>(Fixed::max(static_cast<const Fixed&>(f1), static_cast<const Fixed&>(f2))));
-}
-const Fixed& Fixed::max(const Fixed& f1, const Fixed& f2)
-{
     return (f1 > f2 ? f1 : f2);
+}
+Fixed& Fixed::max(const Fixed& f1, const Fixed& f2)
+{
+    return (Fixed::max(const_cast<Fixed&>(f1), const_cast<Fixed&>(f2)));
 }

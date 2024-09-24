@@ -20,6 +20,9 @@
         "type_traits": "cpp",
         "vector": "cpp",
         "ostream": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "__hash_table": "cpp",
+        "unordered_map": "cpp",
+        "iostream": "cpp"
     }
 }

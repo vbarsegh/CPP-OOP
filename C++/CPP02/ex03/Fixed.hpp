@@ -35,9 +35,9 @@ public:
 	Fixed& operator--();// Префиксный декремент
 	Fixed operator--(int);// Постфиксный декремент
 	static Fixed& min(Fixed& f1, Fixed& f2);
-	static const Fixed& min(const Fixed& f1, const Fixed& f2);
+	static Fixed& min(const Fixed& f1, const Fixed& f2);
 	static Fixed& max(Fixed& f1, Fixed& f2);
-	static const Fixed& max(const Fixed& f1, const Fixed& f2);
+	static Fixed& max(const Fixed& f1, const Fixed& f2);
 
 
 
