@@ -2,7 +2,7 @@
 #include <string>
 #include <fstream>
 
-int	strlen(char *str)
+int	strlenn(char *str)
 {
 	int len = 0;
 	while (str[len] != '\0')
@@ -20,10 +20,9 @@ std::string foo(std::string line, char *s1, char *s2)
 		ind = line.find(s1);
 		if (ind == -1)
 			break ;
-		len_s1 = strlen(s1);
+		len_s1 = strlenn(s1);
 		line.erase(ind, len_s1);//jnjuma
 		line.insert(ind, s2);//avelacnuma
-
 	}
 	return (line);
 }

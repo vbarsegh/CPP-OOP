@@ -15,7 +15,7 @@ Fixed::Fixed(const int value)
 
 Fixed::Fixed(float	value)
 {
-    std::cout << "Float constructor called" << std::endl;
+    // std::cout << "Float constructor called" << std::endl;
     long long temp = roundf(value * (1 << this->fractional_bits));
     if (temp > INT_MAX)
         temp = INT_MAX;
@@ -29,13 +29,13 @@ Fixed::Fixed(float	value)
 
 Fixed::Fixed(const Fixed& other) : fixed_point_value(other.fixed_point_value)
 {
-    std::cout << "copy ctor is called" << std::endl;
+    // std::cout << "copy ctor is called" << std::endl;
     // *this = other;//lav praktika chi
 }
 
 Fixed& Fixed::operator=(const Fixed& other)
 {
-    std::cout << "copy assignment is called" << std::endl;
+    // std::cout << "copy assignment is called" << std::endl;
     if (this == &other)
         return (*this);
     this->fixed_point_value = other.getRawBits();
@@ -66,7 +66,7 @@ int Fixed::toInt( void ) const
 
 Fixed::~Fixed()
 {
-    std::cout << "dtor is called" << std::endl;
+    // std::cout << "dtor is called" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed &fixed)

@@ -1,8 +1,12 @@
 #include "Point.hpp"
+#include <iomanip>
 
-float crossProduct(Point a, Point b, Point C)
+float crossProduct(Point a, Point b, Point point)
 {
-    return (b.x - a.x) * (C.y - a.y) - (b.y - a.y) * (C.x - a.x);
+    return (b.get_Fixed_x().toFloat() - a.get_Fixed_x().toFloat())
+        * (point.get_Fixed_y().toFloat() - a.get_Fixed_y().toFloat())
+        - (b.get_Fixed_y().toFloat() - a.get_Fixed_y().toFloat())
+        * (point.get_Fixed_x().toFloat() - a.get_Fixed_x().toFloat());
 }
 
 bool bsp( Point const a, Point const b, Point const c, Point const point)
@@ -11,22 +15,83 @@ bool bsp( Point const a, Point const b, Point const c, Point const point)
     float bc = crossProduct(b, c, point);
     float ca = crossProduct(c, a, point);
 
-    return (ab >= 0 && bc >= 0 && ca >= 0)
-        || (ab <= 0 && bc <= 0 && ca <= 0);
+    // if (ab == 0 || bc == 0 || ca == 0)
+    //     return (false);
+    if ((ab > 0 && bc > 0 && ca > 0) || (ab < 0 && bc < 0 && ca < 0))
+        return (true);
+    return (false);
 }
 
-int main()
-{
- Point a = {0, 0};
-    Point b = {5, 0};
-    Point c = {0, 5};
-    Point P = {1, 1}; // Точка для проверки
+#define TRIANGLES_CNT 5
+#define A 0
+#define B 1
+#define C 2
 
-    if (isPointInTriangle(a, b, c, P)) {
-        std::cout << "Point is inside the triangle." << std::endl;
-    } else {
-        std::cout << "Point is outside the triangle." << std::endl;
-    }
+bool	bsp(Point const a, Point const b, Point const c, Point const point);
 
-    return 0;
+void	check_points(Point triangles[TRIANGLES_CNT][3], Point points[TRIANGLES_CNT]) {
+	for (int i = 0; i < TRIANGLES_CNT; i++)
+	{
+		bool result = bsp(triangles[i][A], triangles[i][B], triangles[i][C], points[i]);
+		std::cout << std::fixed << std::setprecision(1) << "A:(" << triangles[i][A].get_Fixed_x() << ", " << triangles[i][A].get_Fixed_y() << ")\t";
+		std::cout << std::fixed << std::setprecision(1) << "B:(" << triangles[i][B].get_Fixed_x() << ", " << triangles[i][B].get_Fixed_y() << ")\t";
+		std::cout << std::fixed << std::setprecision(1) << "C:(" << triangles[i][C].get_Fixed_x() << ", " << triangles[i][C].get_Fixed_y() << ")\t";
+		std::cout << std::fixed << std::setprecision(1) << "P:(" << triangles[i][C].get_Fixed_x() << ", " << triangles[i][C].get_Fixed_y() << ")\t";
+		if (result == true)
+			std::cout << "\033[1;32m";
+		else
+			std::cout << "\033[1;31m";
+		std::cout << std::boolalpha << result << std::noboolalpha << std::endl;
+		std::cout << "\033[0m";
+	}
+	std::cout << std::endl;
+}
+
+int main( void ) {
+	// point inside of triangle
+	Point triangles_with_point_inside[TRIANGLES_CNT][3] = {{Point(0.0, 0.0), Point(5.0, 0.0), Point(2.0, 5.0)},\
+														{Point(1.0, 1.0), Point(4.0, 1.0), Point(2.5, 4.0)},\
+														{Point(-2.0, -2.0), Point(2.0, -2.0), Point(0.0, 2.0)},\
+														{Point(1.0, 1.0), Point(6.0, 1.0), Point(4.0, 5.0)},\
+														{Point(-3.0, -3.0), Point(1.0, -3.0), Point(-1.0, 1.0)}};
+	Point points_in_triangle[TRIANGLES_CNT] = {Point(2.0, 2.0), Point(2.0, 2.0), Point(0.0, 0.0), Point(4.0, 3.0), Point(-1.0, -1.0)};
+
+	// point outside of triangle
+	Point triangles_with_point_outside[TRIANGLES_CNT][3] ={{Point(0.0, 0.0), Point(5.0, 0.0), Point(2.0, 5.0)},\
+														{Point(1.0, 1.0), Point(4.0, 1.0), Point(2.5, 4.0)},\
+														{Point(-2.0, -2.0), Point(2.0, -2.0), Point(0.0, 2.0)},\
+														{Point(1.0, 1.0), Point(6.0, 1.0), Point(4.0, 5.0)},\
+														{Point(-3.0, -3.0), Point(1.0, -3.0), Point(-1.0, 1.0)}};
+	Point points_out_triangle[TRIANGLES_CNT] = {Point(6.0, 6.0), Point(5.0, 5.0), Point(3.0, 3.0), Point(7.0, 7.0), Point(2.0, 2.0)};
+
+	// point on edge of triangle
+	Point triangles_with_point_on_edge[TRIANGLES_CNT][3] ={{Point(0.0, 0.0), Point(5.0, 0.0), Point(2.0, 5.0)},\
+														{Point(1.0, 1.0), Point(4.0, 1.0), Point(2.5, 4.0)},\
+														{Point(-2.0, -2.0), Point(2.0, -2.0), Point(0.0, 2.0)},\
+														{Point(1.0, 1.0), Point(6.0, 1.0), Point(4.0, 5.0)},\
+														{Point(-3.0, -3.0), Point(1.0, -3.0), Point(-1.0, 1.0)}};
+	Point points_on_edge_triangle[TRIANGLES_CNT] = {Point(2.0, 0.0), Point(2.5, 1.0), Point(0.0, -2.0), Point(4.0, 1.0), Point(-1.0, -3.0)};
+
+	// point on one of vertexes of triangle
+	Point triangles_with_point_on_vertex[TRIANGLES_CNT][3] ={{Point(1.0, 2.0), Point(4.0, 5.0), Point(7.0, 2.0)},\
+														{Point(0.0, 0.0), Point(5.0, 0.0), Point(2.5, 4.33)},\
+														{Point(-2.0, 3.0), Point(1.0, 6.0), Point(4.0, 3.0)},\
+														{Point(3.0, 3.0), Point(6.0, 7.0), Point(8.0, 4.0)},\
+														{Point(2.0, 1.0), Point(6.0, 5.0), Point(2.0, 5.0)}};
+	Point points_on_vertex_triangle[TRIANGLES_CNT] = {Point(1.0, 2.0), Point(5.0, 0.0), Point(4.0, 3.0), Point(6.0, 7.0), Point(2.0, 5.0)};
+
+	std::cout << "\033[1;35m" << "\n\t\t[==== IS POINT IN TRIANGLE ====]" << "\033[0m\n" << std::endl;
+
+	std::cout << "\033[1;32m" << "Point in a triangle" << "\033[0m" << std::endl;
+	check_points(triangles_with_point_inside, points_in_triangle);
+
+	std::cout << "\033[1;32m" << "Point outside a triangle" << "\033[0m" << std::endl;
+	check_points(triangles_with_point_outside, points_out_triangle);
+
+	std::cout << "\033[1;32m" << "The point on the edges of the triangle" << "\033[0m" << std::endl;
+	check_points(triangles_with_point_on_edge, points_on_edge_triangle);
+
+	std::cout << "\033[1;32m" << "The point on the vertexes of the triangle" << "\033[0m" << std::endl;
+	check_points(triangles_with_point_on_vertex, points_on_vertex_triangle);
+	return 0;
 }

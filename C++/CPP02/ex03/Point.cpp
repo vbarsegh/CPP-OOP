@@ -2,18 +2,18 @@
 
 Point::Point() : x(0) , y(0)
 {
-    std::cout << "Default ctor is called" << std::endl;  
+    // std::cout << "Default ctor is called" << std::endl;  
 }
 
 Point::Point(const float fx, const float fy) : x(fx), y(fy)
 {
-    std::cout << "Ctor with params is called" << std::endl;
+    // std::cout << "Ctor with params is called" << std::endl;
 }
 
 
 Point::Point(const Point& other) : x(other.x), y(other.y)
 {
-    std::cout << "Copy ctor is called" << std::endl;
+    // std::cout << "Copy ctor is called" << std::endl;
     // this->x = other.x;
     // this->y = other.y;
 }
@@ -30,7 +30,17 @@ Point& Point::operator=(const Point& other)
 }
 
 
+const Fixed&  Point::get_Fixed_x()
+{
+    return (this->x);
+}
+
+const Fixed&  Point::get_Fixed_y()
+{
+    return (this->y);
+}
+
 Point::~Point()
 {
-    std::cout << "dtor is called" << std::endl;
+    // std::cout << "dtor is called" << std::endl;
 }
