@@ -2,7 +2,7 @@
 
 ScavTrap::ScavTrap()
 {
-    // this->_name = "Scav_Ananun";
+    this->_name = "Scav_Ananun";
     this->_hit_points = 100;
     _energy_points = 50;
     _attack_damage = 20;

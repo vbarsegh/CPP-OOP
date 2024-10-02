@@ -2,7 +2,7 @@
 
 FragTrap::FragTrap()
 {
-    // this->_name = "Frag_Ananun";
+    this->_name = "Frag_Ananun";
     this->_hit_points = 100;
     _energy_points = 100;
     _attack_damage = 30;

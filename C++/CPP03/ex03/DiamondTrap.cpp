@@ -9,14 +9,14 @@ DiamondTrap::DiamondTrap()
     std::cout << "DiamondTrap default ctor is called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name): ClapTrap("FSDLFDSLK")
+DiamondTrap::DiamondTrap(std::string name)
 {
     this->_name = name;
     // std::cout << "\n\n";
     // std::cout << "_name = " << ClapTrap::_name;
     // std::cout << "\n\n";
 
-    // ClapTrap::_name = name + "_clap_name";
+    ClapTrap::_name = name + "_clap_name";
     this->_hit_points = 100;
     this->_energy_points = ScavTrap::_energy_points;
     this->_attack_damage = FragTrap::_attack_damage;
