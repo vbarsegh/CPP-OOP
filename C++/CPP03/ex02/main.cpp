@@ -1,22 +1,14 @@
-#include "DiamondTrap.hpp"
+#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
 
 
 int main()
 {
-    DiamondTrap obj;
-    obj.attack("henry");
-    std::cout << "ENERGY: " << obj.attackdamage() << std::endl;
+    //ScavTrap obj("asf");
+    ClapTrap *cp = new FragTrap();
 
-    // std::cout << "\n\n";
-    // obj.whoAmI();
-    // std::cout << "\n\n";
-
-    // obj.attack("hgfds");
-    //ClapTrap *cp = new ScavTrap();
-
-   // std::cout << cp->getName() << std::endl;
-   // obj.guardGate();
-   // delete cp;
+    std::cout << cp->getName() << std::endl;
+    delete cp;
     // ClapTrap *base = &obj;//copy ctor chi kanchvum
 
     // ScavTrap obj;

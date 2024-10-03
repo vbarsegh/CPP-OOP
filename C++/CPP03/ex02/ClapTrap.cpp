@@ -1,7 +1,8 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name("Ananun"), _hit_points(10), _energy_points(10), _attack_damage(0)
+ClapTrap::ClapTrap() : _name("Clap_Ananun"), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
+
     std::cout << "default ctor is called" << std::endl;
 }
 

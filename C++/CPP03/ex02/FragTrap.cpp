@@ -9,12 +9,6 @@ FragTrap::FragTrap() : ClapTrap()
     std::cout << "FragTrap default ctor is called" << std::endl;
 }
 
-FragTrap::FragTrap(int)
-{
-    this->_hit_points = 100;
-    this->_attack_damage = 30;
-}
-
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
     std::cout << "FragTrap ctor with params is called" << std::endl;

@@ -1,31 +1,31 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
-    this->_name = "Ananun";
+    // this->_name = "Ananun";
     this->_hit_points = 100;
     _energy_points = 50;
     _attack_damage = 20;
     std::cout << "ScavTrap default ctor is called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
     std::cout << "ScavTrap ctor with params is called" << std::endl;
-    this->_name = name;
+    // this->_name = name;
     this->_hit_points = 100;
     _energy_points = 50;
     _attack_damage = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& other)
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
 {
     std::cout << "ScavTrap copy ctor is called" << std::endl;
     // *this = other;//lav praktika chi
-    this->_name = other._name;
-    this->_hit_points = other._hit_points;
-    this->_energy_points = other._energy_points;
-    this->_attack_damage = other._attack_damage;
+    // this->_name = other._name;
+    // this->_hit_points = other._hit_points;
+    // this->_energy_points = other._energy_points;
+    // this->_attack_damage = other._attack_damage;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& other)
@@ -48,7 +48,7 @@ void ScavTrap::attack(const std::string& target)
         std::cout << "ScavTrap can not do anything" << std::endl;
     if (this->_energy_points > 0)
         this->_energy_points--;
-    std::cout << "current energy_points = " << _energy_points << std::endl;//checki hamar heto kmaqres handzneluc
+    std::cout << "ScavTrap current energy_points = " << _energy_points << std::endl;//checki hamar heto kmaqres handzneluc
     
 }
 

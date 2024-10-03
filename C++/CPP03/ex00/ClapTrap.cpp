@@ -14,8 +14,10 @@ void ClapTrap::attack(const std::string& target)
 {
     if (this->_hit_points > 0 && this->_energy_points > 0)
         std::cout << "ClapTrap " << this->_name << " attacks " << target << ",causing " << this->_attack_damage << " points of damage!" << std::endl;
-    else
-        std::cout << "ClapTrap can not do anything" << std::endl;
+    else if (this->_hit_points <= 0)
+        std::cout << "ClapTrap " << _name << " is dead!" << std::endl;
+    else if (this->_energy_points <= 0)
+        std::cout << "ClapTrap "<< _name << " has no energy" << std::endl;
     if (this->_energy_points > 0)
         this->_energy_points--;
 }
@@ -43,7 +45,6 @@ void ClapTrap::beRepaired(unsigned int amount)
             this->_hit_points = INT_MAX;
         else
         {
-
             if (this->_hit_points + amount < 0)//=>overflowa exe
                 this->_hit_points = INT_MAX;
             else
@@ -52,6 +53,10 @@ void ClapTrap::beRepaired(unsigned int amount)
         if (this->_energy_points > 0)
             this->_energy_points--;
     }
+    else if (this->_hit_points <= 0)
+        std::cout << "ClapTrap " << _name << " is dead!" << std::endl;
+    else if (this->_energy_points <= 0)
+        std::cout << "ClapTrap "<< _name << " has no energy" << std::endl;
 }
 
 ClapTrap::~ClapTrap()

@@ -3,12 +3,11 @@
 #include <iostream>
 #include <string>
 
-class FragTrap : virtual public ClapTrap
+class FragTrap : public ClapTrap
 {
     // public:
     //     const int a;
     public:
-        FragTrap(int);
         FragTrap();
         FragTrap(std::string name);
         FragTrap(const FragTrap& other);

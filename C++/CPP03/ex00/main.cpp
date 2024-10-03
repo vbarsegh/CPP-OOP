@@ -20,10 +20,14 @@ int main()
     robot1.takeDamage(5); // Удар на 5 единиц
     robot1.takeDamage(20); // Попытка нанести слишком большой урон
 
+std::cout << "\n=== Attack Test ===" << std::endl;
+    robot1.attack("Enemy1");
+    robot2.attack("Enemy2");
+
     // Восстановление здоровья
     std::cout << "\n=== Repair Test ===" << std::endl;
     robot1.beRepaired(5); // Восстановление на 5 единиц
-    robot1.beRepaired(100); // Восстановление с превышением
+    robot2.beRepaired(100); // Восстановление с превышением
 
     // Пограничные случаи
     std::cout << "\n=== Edge Cases ===" << std::endl;
