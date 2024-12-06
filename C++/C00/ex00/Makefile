@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRC = megaphone.cpp
 
-OBJS = ${SRC:.c=.o}
+OBJS = ${SRC:.cpp=.o}
 
 all: ${NAME}
 
@@ -15,7 +15,7 @@ ${NAME}: ${OBJS} Makefile
 
 bonus: ${NAME_BONUS}
 
-%.o:%.c
+%.o:%.cpp
 	${CC} ${FLAGS} -c  $< -o $@
 
 clean:

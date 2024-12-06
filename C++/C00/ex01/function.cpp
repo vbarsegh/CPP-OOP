@@ -50,10 +50,11 @@ std::string	check_last_name(std::string last_name)
 			exit(1);
 		std::cout << "Please write correct input" << std::endl;
 		std::cout << "last_name = ";
-    	 getline(std::cin, last_name);
+    	getline(std::cin, last_name);
 	}
 	return (last_name);
 }
+
 std::string	check_nickname(std::string nick_name)
 {
 	while (only_spaces(nick_name) == 1 || check_only_letter(nick_name) == -1)
@@ -66,6 +67,7 @@ std::string	check_nickname(std::string nick_name)
 	}
 	return (nick_name);
 }
+
 std::string	check_phone_num(std::string phone_num)
 {
 	while (only_spaces(phone_num) == 1 || check_only_digit(phone_num) == -1)
