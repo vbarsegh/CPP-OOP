@@ -59,7 +59,9 @@ void Harl::complain( std::string level )
             (this->*func_arr[3])();
                 break ;
         default:
+        {
             std::cout << "Wrong level" << std::endl;
             break ;
+        }
     }
 }

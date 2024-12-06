@@ -11,8 +11,8 @@ int main()
 	getline(std::cin, name_z);
 	zombie = newZombie(name_z);
 	zombie->announce();
-	std::cout << "ayjm s tacki mej stexcvac zombin" <<std::endl;
-	randomChump("esel senc");
+	std::cout << "ayjm stacki mej stexcvac zombin" <<std::endl;
+	randomChump("vbarsegh");
 	delete zombie;
 
 }

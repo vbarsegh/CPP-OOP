@@ -29,10 +29,10 @@ std::string foo(std::string line, char *s1, char *s2)
 
 int main(int argc, char **argv)
 {
-	std::string name_file = argv[1];
 
     if (argc != 4)
 		return (std::cout << "Wrong input!" << std::endl && 1);
+	std::string name_file = argv[1];
 	std::ifstream cur_file;
 	cur_file.open(argv[1]);
 	if (!cur_file.is_open())
