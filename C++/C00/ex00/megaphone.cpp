@@ -9,11 +9,9 @@ int main(int argc, char **argv)
         return (1);
     }
     int i = 1;
-    // std::string arr;
-    // getline(std::cin, arr);
     while (i < argc)
     {
-        for (unsigned int j= 0; argv[i][j]; j++)
+        for (unsigned int j = 0; argv[i][j]; j++)
             std::cout << (char)toupper(argv[i][j]);
         i++;
     }

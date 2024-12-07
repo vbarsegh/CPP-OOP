@@ -1,6 +1,6 @@
 #include <iostream>
 #include "PhoneBook.hpp"
-// #include "contact.hpp"
+
 int check_len_i(std::string i);
 
 PhoneBook::PhoneBook()
@@ -14,14 +14,22 @@ PhoneBook::~PhoneBook()
     // std::cout << "Destructor of PhoneBook called" << std::endl;
 }
 
+void    PhoneBook::set_members(int i)
+{
+    this->obj[i].set_first_name();
+    this->obj[i].set_last_name();
+    this->obj[i].set_nick_name();
+    this->obj[i].set_phone_num();
+    this->obj[i].set_secret();
+	if (this->all_count_of_contacts < 3)//8
+        this->all_count_of_contacts++;
+}
 
 int len_contact_member(std::string str)
 {
     int	len = str.length();
 	if (len > 10)
-	{
 		std::cout << str.substr(0, 9) << ".";
-	}
     else
     {
         int right_align = 10 - len;
@@ -36,6 +44,7 @@ int len_contact_member(std::string str)
 	return (1);
 		
 }
+
 void    PhoneBook::get_all_contact()
 {
     int j = 0;
@@ -55,7 +64,7 @@ void    PhoneBook::get_all_contact()
     {
         while (1)
         {
-            std::cout << "---------------------------------------------" << std::endl;
+            // std::cout << "---------------------------------------------" << std::endl;
             std::cout << "Please say what index qez khetaqrqreg@ -> ";
 	        getline(std::cin, i);
             if (std::cin.eof())
@@ -67,16 +76,10 @@ void    PhoneBook::get_all_contact()
         if (ind >= 0 && ind < all_count_of_contacts)
         {
             this->my_cout(ind);
-            // std::cout << ind << std::endl;
-            // std::cout << this->obj[ind].get_first_name() << std::endl;
-            // std::cout << this->obj[ind].get_last_name() << std::endl;
-            // std::cout << this->obj[ind].get_nick_name() << std::endl;
-            // std::cout << this->obj[ind].get_phone_num() << std::endl;
-            // std::cout << this->obj[ind].get_secret() << std::endl;
         }
         else
         {
-            while (ind < 0 || ind >= all_count_of_contacts)
+            while (ind < 0 || ind >= all_count_of_contacts || check_len_i(i) != 1)
             {
                 std::cout << "Please say what (correct) index qez khetaqrqreg@ -> ";
                 getline(std::cin, i);
@@ -85,12 +88,6 @@ void    PhoneBook::get_all_contact()
                 ind = i[0] - 48;
             }
             this->my_cout(ind);
-            // std::cout << ind << std::endl;
-            // std::cout << this->obj[ind].get_first_name() << std::endl;
-            // std::cout << this->obj[ind].get_last_name() << std::endl;
-            // std::cout << this->obj[ind].get_nick_name() << std::endl;
-            // std::cout << this->obj[ind].get_phone_num() << std::endl;
-            // std::cout << this->obj[ind].get_secret() << std::endl;
         }
     }
     else

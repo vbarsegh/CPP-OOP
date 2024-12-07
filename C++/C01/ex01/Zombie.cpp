@@ -11,6 +11,12 @@ Zombie::Zombie()
     this->name = "NULL";
 }
 
+void Zombie::set_name(std::string name)
+{
+	this->name = name;
+}
+
+
 Zombie::Zombie(std::string name)
 {
 	std::cout << "Zombie ctor whit parametr is called" << std::endl;

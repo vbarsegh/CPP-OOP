@@ -59,7 +59,7 @@ void	Account::_displayTimestamp( void )
 	time_t	cur_time;
 	struct tm *infotime;
 
-	cur_time = time(nullptr);
+	cur_time = time(NULL);
 	infotime = localtime(&cur_time);
 	std::cout << "[" << infotime->tm_year + 1900;
 	if (infotime->tm_mon + 1 < 10)
@@ -78,7 +78,6 @@ void	Account::_displayTimestamp( void )
 	if (infotime->tm_sec < 10)
 	std::cout << "0";
 	std::cout << infotime->tm_sec << "] ";
-	
 }
 
 void	Account::makeDeposit( int deposit )

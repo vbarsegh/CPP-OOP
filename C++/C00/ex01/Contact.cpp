@@ -1,17 +1,5 @@
 #include "PhoneBook.hpp"
 
-void    PhoneBook:: set_members(int i)
-{
-    this->obj[i].set_first_name();
-    this->obj[i].set_last_name();
-    this->obj[i].set_nick_name();
-    this->obj[i].set_phone_num();
-    this->obj[i].set_secret();
-	if (this->all_count_of_contacts < 3)
-                this->all_count_of_contacts++;
-}
-
-
 //////////////setters//////////
 void    Contact::set_first_name()
 {

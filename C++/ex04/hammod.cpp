@@ -3,8 +3,16 @@
 #include <iostream>
 #include <cmath>
 
+
+#define PORDZERI_QANAK 3
+
+double spasarkman_hav[PORDZERI_QANAK];
+double hertum_hayti_spaselu_mij_jmk[PORDZERI_QANAK];
+double hayti_spasarkman_mij_jmk[PORDZERI_QANAK];
+
 using namespace std;
 
+void    foo(int pordz);
 void	get_that_r_ery_xary_kongruent(int n0, int lambda, int m, int myu);
 // void	get_that_r_ery_kongruent(int n0, int lambda, int m);
 int check_vor_spasarkman_kabinetna_azat(double mutq_ti[], int i, const int N, double t_azatum[]);
@@ -14,17 +22,38 @@ int mutq(double mutq_ti[], double arr_r[], const double T, int count);
 void spasum(double spasum_ti[], double arr_r[], int *count, const double T, int hayteri_qanak);
 void	spasarkum(double spasarkum_ti[], double arr_r[], int hayteri_qanak);
 
+int pordz = 0;
+
 int main()
 {
-    int n0;
+    while (pordz < PORDZERI_QANAK)
+    {
+        foo(pordz);
+        pordz++;
+    }
+    // get_that_r_ery_kongruent(n0 ,lambda, m);
+}
 
-    cout << "n0 = ";
-    cin >> n0;
-    while (!(n0 > 0 && n0 % 2 == 1))
+void    foo(int pordz)
+{
+    static int n0;
+    if (pordz == 0)
     {
         cout << "n0 = ";
         cin >> n0;
+        while (!(n0 > 0 && n0 % 2 == 1))
+        {
+            cout << "n0 = ";
+            cin >> n0;
+        }
+        cout << "kpav->" << n0<<endl;
     }
+    else
+    {
+        n0 += 2;
+        cout << "kpav->" << n0<<endl;
+    }
+
 	int myu;
 	do {cout << "myu = ";cin >> myu;}
 	while (myu <= 0);
@@ -36,10 +65,6 @@ int main()
 		cout << "please write only + or - \nNote:+ is 1, - is -1\n";
     	cin >> sign;
 	}while (!(sign == 1 || sign == -1));
-	// {
-	// 	cout << "please write only + or - \nNote:+ is 1, - is -1\n";
-    // 	cin >> sign;
-	// }
     int t;
 	do {cout << "t = ";cin >> t;}
 	while (t < 1);
@@ -58,9 +83,7 @@ int main()
     }
 	int m = pow(2, k);
 	get_that_r_ery_xary_kongruent(n0 ,lambda, m, myu);
-    // get_that_r_ery_kongruent(n0 ,lambda, m);
 }
-
 void	get_that_r_ery_xary_kongruent(int n0, int lambda, int m,int myu)
 {
 	double arr_r[10000];
@@ -72,13 +95,10 @@ void	get_that_r_ery_xary_kongruent(int n0, int lambda, int m,int myu)
 	{
 		ni = (temp * lambda + myu) % m;
 		arr_r[i] = (double)ni / m;
-		// cout << "n = " << ni << endl;
 		cout << "r[" << i << "]= " << arr_r[i] << endl;
 		temp = ni;
 		count++;
 	}
-	// int h = count;
-	// cout << "h = " << h << endl;
     cout  << "stex count = " << count << endl;
     const double T = 150.0;
     double	mutq_ti[1000];//muqti t-erna//amen tarr iranic nerkayacnuma tvyal i-rd hayti skzbi jmky
@@ -124,18 +144,19 @@ int check_vor_spasarkman_kabinetna_azat(double mutq_ti[], int i, const int N, do
 
 void    dvijenin_skvav(double mutq_ti[], double spasum_ti[], double spasarkum_ti[], int hayteri_qanak, const double T)
 {
-    cout << T<<endl;
-    cout << "ola";
     int ch = 0;//chspasarkvacneri arrayi index
     int chspasarkvac[100];
     int s = 0;
     int spasarkvac[100];
-    const int N = 2;
+    const int N = 3;
     double t_azatum[N] = {0};
     int i = 0;
     int j;
     double min;
     int index;//te vor kabinetna zbaxvacneric arajiny azatvelu
+    double hertum_spaselu_jmkneri_gumar = 0;
+    int hertum_haytnvacneri_qanak = 0;
+    double spasarkman_jmkneri_gumar = 0;
     while (i < hayteri_qanak)
     {
         j = check_vor_spasarkman_kabinetna_azat(mutq_ti, i ,N, t_azatum);
@@ -149,6 +170,7 @@ void    dvijenin_skvav(double mutq_ti[], double spasum_ti[], double spasarkum_ti
             else
             {
                 chspasarkvac[ch++] = i;
+                cout << "sorry bayc du chspasarkvecir" << endl;
                 break;
             }
         }
@@ -156,6 +178,9 @@ void    dvijenin_skvav(double mutq_ti[], double spasum_ti[], double spasarkum_ti
         {
             min = find_min_value_of_t_azatum(t_azatum, N, &index);//gtnenq amenashut azatvox kabinety
                 cout << "shut kazatvi = "<< min <<"index = " <<index<< endl;
+            cout << "checki hamar " <<  min - mutq_ti[i] << endl;
+            hertum_spaselu_jmkneri_gumar += min - mutq_ti[i];
+            hertum_haytnvacneri_qanak++;
             if (mutq_ti[i] + spasum_ti[i] <= min)//kam zut poqr
             {
                 cout << "cavoq dzer spasely ogtum chi,polyubomu duq merjvelu eq ' cheq spasarlvelu" << endl;
@@ -165,7 +190,7 @@ void    dvijenin_skvav(double mutq_ti[], double spasum_ti[], double spasarkum_ti
             else
             {
                 t_azatum[index] = mutq_ti[i] + (t_azatum[index] - mutq_ti[i]) + spasarkum_ti[i];
-                cout << "yhnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ->" << t_azatum[index]<< "index = "<< index<<endl;
+                cout << "yhnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ->" << t_azatum[index]<< " ::index = "<< index<<endl;
                 if (t_azatum[index] <= T)
                     spasarkvac[s++] = i;
                 else
@@ -178,25 +203,48 @@ void    dvijenin_skvav(double mutq_ti[], double spasum_ti[], double spasarkum_ti
 
     cout << "ch = " << ch<<endl;
     cout << "s = " << s<<endl;
-    int c= 0 ;
-    while (c < ch)
+    // int c= 0 ;
+    // while (c < ch)
+    // {
+    //     cout << "chhres = "<<chspasarkvac[c] << endl;
+    //     c++;
+    // }
+    // c= 0 ; 
+    // while (c < s)
+    // {
+    //     cout << "hres = "<<spasarkvac[c] << endl;
+    //     c++;
+    // }
+    //
+    spasarkman_hav[pordz] = (double)s / hayteri_qanak;
+    cout << "Սպասարկման հավանականությունը "<< pordz << "-rd pordzum -> " << spasarkman_hav[pordz] << endl;
+    //
+    // double merjman_hav = (double)ch / hayteri_qanak;
+    // cout << "1.Մերժման հավանականությունը ->" << merjman_hav << endl;
+    //
+    if (hertum_haytnvacneri_qanak != 0)
     {
-        cout << "chhres = "<<chspasarkvac[c] << endl;
-        c++;
+        hertum_hayti_spaselu_mij_jmk[pordz] = (double)hertum_spaselu_jmkneri_gumar / hertum_haytnvacneri_qanak;
+        cout << "Հերթում հայտի սպասելու միջին ժամանակը " << pordz << "-rd pordzum -> " << hertum_hayti_spaselu_mij_jmk[pordz] << endl;
     }
-    c= 0 ; 
+    else
+        cout << "hertum vochmek chi haytnve" << endl;
+    //
+    int c = 0;
     while (c < s)
     {
-        cout << "hres = "<<spasarkvac[c] << endl;
+        spasarkman_jmkneri_gumar += spasarkum_ti[spasarkvac[c]];
         c++;
     }
+    hayti_spasarkman_mij_jmk[pordz] = (double)spasarkman_jmkneri_gumar / s;
+    cout << "Հայտի սպասարկման միջին ժամանակը " << pordz << "-rd pordzum -> " << hayti_spasarkman_mij_jmk[pordz] << endl;
 }
 
 int mutq(double mutq_ti[], double arr_r[], const double T, int count)
 {
     // cout << "&? = " << count;
-	const int a = 4;
-	const int b = 8;
+	const int a = 1;
+	const int b = 3;
 	int	t0 = 0;
 	// double	mutq_ti[1000];//muqti t-erna//amen tarr iranic nerkayacnuma tvyal i-rd hayti skzbi jmky
 	// arr_ti[0] = 0;
@@ -241,27 +289,15 @@ void spasum(double spasum_ti[], double arr_r[], int *count, const double T, int 
     {
         ri_sum = 0;
         j = i;
-    // cout << "count = "<< *count << endl;
         while (j < (12 + i))//2rd paymany nra hamara,vor karoxa ev en verevi while hly chishta aysinqn et T-in der chemq hase(ete iharke paymany chisht em dre,et pahy harcnel????),bayc karoxa arr_r-ers chheriqen(32 hat en)
         {
-            // cout << "blin";
             ri_sum += arr_r[j];
-            // cout << "sum  = " << ri_sum << " ";
-            // cout << "arr_r = " << arr_r[j] << " ";
             j++;
         }
-        // cout << "ri+sum = "<<ri_sum << endl;
-        // if (!(i + 12 <= *count))
-        // {
-        //     cout << "j = " << j<<endl;
-        //     cout << "pahooo\n";
-        //     break ;
-        // }
         spasum_ti[i] = myu + (sigma * (ri_sum - 6));
         cout << "spasman ti = " << spasum_ti[i] << endl;
         temp = spasum_ti[i];
         i++;
-        // cout << "coooooount = " <<*count << endl;
         hayteri_qanak--;
     }
     cout << "i = " << i << endl;
