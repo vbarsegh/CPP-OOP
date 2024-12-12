@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
-
+#include <climits>
 
 class Fixed
 {
