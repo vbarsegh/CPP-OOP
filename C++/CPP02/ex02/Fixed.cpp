@@ -24,7 +24,6 @@ Fixed::Fixed(float	value)
     
     this->fixed_point_value = temp;//stugenq tenanq chishta???????
     // std::cout << "float ctor " << fixed_point_value << std::endl;
-
 }
 
 Fixed::Fixed(const Fixed& other) : fixed_point_value(other.fixed_point_value)
