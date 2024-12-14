@@ -12,11 +12,32 @@ Fixed::Fixed(const int value)
     this->fixed_point_value = value << this->fractional_bits;//<=>value * (1 << this->fractional_bits))
     std::cout << "int ctor " << fixed_point_value << std::endl;
 }
+//KAREVOR
+// Используйте value << 3, если:
 
+// Вы работаете с целыми числами.
+// Вам нужна максимальная производительность.
+// Используйте value * (1 << 3), если:
+
+// Вы работаете с числами с плавающей точкой.
+// Вам нужна поддержка дробной части.
+
+
+
+// Операция	                 value << 3	                                   value * (1 << 3)
+// Типы данных	         Только целые (int, unsigned).                	Целые и числа с плавающей точкой.
+// Смысл	                 Сдвиг битов влево.                              	Умножение на 2^3=8
+// Производительность	     Быстрее, особенно для целых типов.	         Немного медленнее из-за умножения.
+// Точность	           Только целые числа, дроби теряются.	         Поддерживает дробные значения.
+
+
+// Итог:
+// Целые числа? Можно использовать и <<, и * (1 << 3), но << быстрее.
+// Числа с плавающей точкой? Только * (1 << 3) подходит.
 Fixed::Fixed(float	value)
 {
     std::cout << "Float constructor called" << std::endl;
-    this->fixed_point_value = roundf(value * (1 << this->fractional_bits));
+    this->fixed_point_value = roundf(value * (1 << this->fractional_bits));//roundf-i shnorhiv->Or. 44.6 = 45;  44.3 = 44;
     std::cout << "float ctor " << fixed_point_value << std::endl;
 
 }

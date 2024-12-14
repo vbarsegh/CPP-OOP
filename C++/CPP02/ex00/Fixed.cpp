@@ -9,7 +9,7 @@ Fixed::Fixed()
 Fixed::Fixed(const Fixed& other) : fixed_point_value(other.fixed_point_value)
 {
     std::cout << "copy ctor is called" << std::endl;
-    // *this = other;
+    // *this = other;//senc chenq ani ete unenq dinamic hishoxutyun,vortev *this = other-i ardyunqum kkanchvi op=,vori mej deep copy pti arvi,et iranic nerkayacnuma delete enq anum this-i sax membernery u nor taza new enq anum this-i hamar u grum orinak this->a = other.a e ayln, bayc xndiry nranuma vor seg kta op=-i mej,vortev hly this-i membernery chkan(zibil en)isk es dre free em anum!!!!!!
 }
 
 
