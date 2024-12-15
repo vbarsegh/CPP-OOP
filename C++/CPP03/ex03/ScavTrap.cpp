@@ -47,7 +47,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 
 void ScavTrap::attack(const std::string& target)
 {
-    //std::cout << "a = " << a << std::endl;
+    // std::cout << "a = "  << std::endl;
     if (this->_hit_points > 0 && this->_energy_points > 0)
         std::cout << "ScavTrap " << this->_name << " attacks " << target << ",causing " << this->_attack_damage << " points of damage!" << std::endl;
     else

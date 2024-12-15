@@ -1,6 +1,6 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _hit_points(10), _energy_points(10), _attack_damage(0)
+ClapTrap::ClapTrap() : _name("Ananun"), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
     std::cout << "default ctor is called" << std::endl;
 }
@@ -8,6 +8,27 @@ ClapTrap::ClapTrap() : _hit_points(10), _energy_points(10), _attack_damage(0)
 ClapTrap::ClapTrap(std::string name) : _name(name), _hit_points(10), _energy_points(10), _attack_damage(0)
 {
     std::cout << "ctor with params is called" << std::endl;
+}
+ClapTrap::ClapTrap(const ClapTrap& other)
+{
+    std::cout << "copy ctor is called" << std::endl;
+    // *this = other;//lav praktika chi
+    this->_name = other._name;
+    this->_hit_points = other._hit_points;
+    this->_energy_points = other._energy_points;
+    this->_attack_damage = other._attack_damage;
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap& other)
+{
+    // std::cout << "copy assignment is called" << std::endl;
+    if (this == &other)
+        return (*this);
+    this->_name = other._name;
+    this->_hit_points = other._hit_points;
+    this->_energy_points = other._energy_points;
+    this->_attack_damage = other._attack_damage;
+    return (*this);
 }
 
 void ClapTrap::attack(const std::string& target)
@@ -21,19 +42,29 @@ void ClapTrap::attack(const std::string& target)
     if (this->_energy_points > 0)
         this->_energy_points--;
 }
+
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (amount >= INT_MAX)
+    if (this->_hit_points > 0 && this->_energy_points > 0)
     {
-        this->_hit_points = 0;
-        return ;
+        if (amount >= INT_MAX)
+        {
+            this->_hit_points = 0;
+            return ;
+        }
+        std::cout <<" bo = " << this->_hit_points - amount<<std::endl;
+        if (static_cast<int>(this->_hit_points - amount) < 0)
+            this->_hit_points = 0;
+        else
+        {
+            this->_hit_points -= amount;
+            std::cout << "exav";
+        }
+        std::cout << "takeDamage is called" << std::endl;
+    // std::cout << "current hit_points = " << this->_hit_points << std::endl;//checki hamar heto kmaqres handzneluc
     }
-    if (this->_hit_points - amount < 0)
-        this->_hit_points = 0;
     else
-        this->_hit_points -= amount;
-    std::cout << "takeDamage is called" << std::endl;
-    
+        std::cout << "has no hit_points or energy_points" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)

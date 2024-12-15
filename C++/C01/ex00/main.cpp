@@ -14,5 +14,4 @@ int main()
 	std::cout << "ayjm stacki mej stexcvac zombin" <<std::endl;
 	randomChump("vbarsegh");
 	delete zombie;
-
 }

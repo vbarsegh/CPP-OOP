@@ -2,7 +2,7 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-int main()
+int main_a()
 {
 // const Animal* j = new Dog();
 // const Animal* i = new Cat();
@@ -45,4 +45,10 @@ unsigned int size = 4;
 	std::cout << "\033[35m***********************************************\033[0m" << std::endl;
 	std::cout << std::endl;
 return 0;
+}
+
+int main()
+{
+	main_a();
+	system("leaks Brain");
 }

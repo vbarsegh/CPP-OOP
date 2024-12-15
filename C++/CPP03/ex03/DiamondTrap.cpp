@@ -3,6 +3,7 @@
 DiamondTrap::DiamondTrap() : FragTrap(13), ScavTrap(13)
 {
     this->_name = "Diamond_Ananun";
+    ClapTrap::_name = this->_name + "_clap_name";
     // this->_hit_points = FragTrap::_hit_points;
     // this->_energy_points = ScavTrap::_energy_points;
     // this->_attack_damage = FragTrap::_attack_damage;
@@ -17,6 +18,7 @@ DiamondTrap::DiamondTrap(std::string name) :  FragTrap(13), ScavTrap(13)
     // std::cout << "\n\n";
 
     ClapTrap::_name = name + "_clap_name";
+    std::cout << "hmm = " << this->_name<<std::endl;
     // this->_hit_points = 100;
     // this->_energy_points = 50;
     // this->_attack_damage = 30;
@@ -49,8 +51,6 @@ void DiamondTrap::whoAmI()
 {
     std::cout << "Diamond name is " << this->_name << " and ClapTrap name is " << this->ClapTrap::_name << std::endl;
 }
-
-
 
 DiamondTrap::~DiamondTrap()
 {

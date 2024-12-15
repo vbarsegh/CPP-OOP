@@ -23,7 +23,7 @@ class ClapTrap
         int get_int_member(){return _hit_points;}
 
         /// @
-        ~ClapTrap();
+        virtual ~ClapTrap();
 };
 
  

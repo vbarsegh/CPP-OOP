@@ -3,7 +3,7 @@
 
 int main()
 {
-    DiamondTrap obj;
+    DiamondTrap obj("ANRY");
     obj.attack("henry");
     std::cout << "ENERGY: " << obj.attackdamage() << std::endl;
 

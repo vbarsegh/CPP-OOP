@@ -40,29 +40,31 @@ void ClapTrap::attack(const std::string& target)
         std::cout << "ClapTrap can not do anything" << std::endl;
     if (this->_energy_points > 0)
         this->_energy_points--;
-    std::cout << "ClapTrap current energy_points = " << _energy_points << std::endl;//checki hamar heto kmaqres handzneluc
+    // std::cout << "ClapTrap current energy_points = " << _energy_points << std::endl;//checki hamar heto kmaqres handzneluc
     
 }
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    // std::cout << "zzzzz = " << this->_hit_points << std::endl;
-    // if (this->_hit_points)
-    if (amount >= INT_MAX)
+    if (this->_hit_points > 0 && this->_energy_points > 0)
     {
-        this->_hit_points = 0;
-        return ;
+        if (amount >= INT_MAX)
+        {
+            this->_hit_points = 0;
+            return ;
+        }
+        std::cout <<" bo = " << this->_hit_points - amount<<std::endl;
+        if (static_cast<int>(this->_hit_points - amount) < 0)
+            this->_hit_points = 0;
+        else
+        {
+            this->_hit_points -= amount;
+            std::cout << "exav";
+        }
+        std::cout << "takeDamage is called" << std::endl;
+    // std::cout << "current hit_points = " << this->_hit_points << std::endl;//checki hamar heto kmaqres handzneluc
     }
-    std::cout <<" bo = " << this->_hit_points - amount<<std::endl;
-    if (static_cast<int>(this->_hit_points - amount) < 0)
-        this->_hit_points = 0;
     else
-    {
-        this->_hit_points -= amount;
-        std::cout << "exav";
-    }
-    std::cout << "takeDamage is called" << std::endl;
-    std::cout << "current hit_points = " << this->_hit_points << std::endl;//checki hamar heto kmaqres handzneluc
-    
+        std::cout << "has no hit_points or energy_points" << std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
