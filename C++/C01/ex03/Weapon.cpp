@@ -19,7 +19,7 @@ const std::string& Weapon::getType()
 
 void	Weapon::setType(std::string new_type)
 {
-	std::cout << "kancvav esi" << std	::endl;
+	// std::cout << "kancvav esi" << std::endl;
 	this->type = new_type;
 }
 

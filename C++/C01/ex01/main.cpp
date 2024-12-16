@@ -18,5 +18,5 @@ int main()
     }
 	delete[] zombie;
     // system("leaks Moarbrainz");
-
+    return(0);
 }

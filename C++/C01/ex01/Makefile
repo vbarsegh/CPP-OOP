@@ -2,7 +2,7 @@ NAME = Moarbrainz
 
 CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 #-g3 -fsanitize=address
 
 SRC = Zombie.cpp main.cpp zombieHorde.cpp
 

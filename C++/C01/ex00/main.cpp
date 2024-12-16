@@ -8,10 +8,13 @@ int main()
 	std::string name_z;
     Zombie  *zombie;
 
+	std::cout << "name = ";
 	getline(std::cin, name_z);
 	zombie = newZombie(name_z);
 	zombie->announce();
 	std::cout << "ayjm stacki mej stexcvac zombin" <<std::endl;
 	randomChump("vbarsegh");
 	delete zombie;
+	// system("leaks BraiiiiiiinnnzzzZ");
+	return (0);
 }

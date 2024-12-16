@@ -2,7 +2,7 @@ NAME = Unnecessary_violence
 
 CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 #-g3 -fsanitize=address
 
 SRC = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
