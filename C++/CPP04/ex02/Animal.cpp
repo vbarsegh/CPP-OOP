@@ -34,10 +34,7 @@ std::string Animal::getType (void) const//consty grum enq vortev mainum Animal t
 // {
 //     std::cout << "minchev chimanam inch Animala vonc dzen hanem?hetaqrqrir mardess" << std::endl;
 // }
-
-
 Animal::~Animal()
 {
     std::cout << "Animal dtor is called" << std::endl;
-
 }

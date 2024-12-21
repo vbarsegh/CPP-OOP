@@ -9,11 +9,9 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hit_points(10), _energy_poi
 {
     std::cout << "ctor with params is called" << std::endl;
 }
-
 ClapTrap::ClapTrap(const ClapTrap& other)
 {
     std::cout << "copy ctor is called" << std::endl;
-    // *this = other;//lav praktika chi
     this->_name = other._name;
     this->_hit_points = other._hit_points;
     this->_energy_points = other._energy_points;
@@ -36,17 +34,19 @@ void ClapTrap::attack(const std::string& target)
 {
     if (this->_hit_points > 0 && this->_energy_points > 0)
         std::cout << "ClapTrap " << this->_name << " attacks " << target << ",causing " << this->_attack_damage << " points of damage!" << std::endl;
-    else
-        std::cout << "ClapTrap can not do anything" << std::endl;
+    else if (this->_hit_points <= 0)
+        std::cout << "ClapTrap " << _name << " is dead!" << std::endl;
+    else if (this->_energy_points <= 0)
+        std::cout << "ClapTrap "<< _name << " has no energy" << std::endl;
     if (this->_energy_points > 0)
         this->_energy_points--;
-    // std::cout << "ClapTrap current energy_points = " << _energy_points << std::endl;//checki hamar heto kmaqres handzneluc
-    
 }
+
 void ClapTrap::takeDamage(unsigned int amount)
 {
     if (this->_hit_points > 0 && this->_energy_points > 0)
     {
+        std::cout << "takeDamage is called" << std::endl;
         if (amount >= INT_MAX)
         {
             this->_hit_points = 0;
@@ -60,7 +60,6 @@ void ClapTrap::takeDamage(unsigned int amount)
             this->_hit_points -= amount;
             std::cout << "exav";
         }
-        std::cout << "takeDamage is called" << std::endl;
     // std::cout << "current hit_points = " << this->_hit_points << std::endl;//checki hamar heto kmaqres handzneluc
     }
     else
@@ -76,8 +75,7 @@ void ClapTrap::beRepaired(unsigned int amount)
             this->_hit_points = INT_MAX;
         else
         {
-
-            if (static_cast<int>(this->_hit_points + amount) < 0)//=>overflowa exe,es casti pahy partadira ete chem anum sxala linum, overfloa ylnum
+            if (this->_hit_points + amount < 0)//=>overflowa exe
                 this->_hit_points = INT_MAX;
             else
                 this->_hit_points += amount;
@@ -85,11 +83,13 @@ void ClapTrap::beRepaired(unsigned int amount)
         if (this->_energy_points > 0)
             this->_energy_points--;
     }
-    std::cout << "Repaitedi current hit_points = " << this->_hit_points << std::endl;//checki hamar heto kmaqres handzneluc//jnjel verjum
-
+    else if (this->_hit_points <= 0)
+        std::cout << "ClapTrap " << _name << " is dead!" << std::endl;
+    else if (this->_energy_points <= 0)
+        std::cout << "ClapTrap "<< _name << " has no energy" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "dtor is called" << std::endl;
+    std::cout << "ClapTrap dtor is called" << std::endl;
 }

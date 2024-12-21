@@ -35,9 +35,7 @@ void    WrongAnimal::makeSound() const
     std::cout << "minchev chimanam inch WrongAnimala vonc dzen hanem?hetaqrqrir mardess" << std::endl;
 }
 
-
 WrongAnimal::~WrongAnimal()
 {
     std::cout << "WrongAnimal dtor is called" << std::endl;
-
 }

@@ -7,7 +7,7 @@ int main()
     //ScavTrap obj("asf");
     ClapTrap *cp = new FragTrap();
 
-    std::cout << cp->getName() << std::endl;
+    // std::cout << cp->getName() << std::endl;
     delete cp;
     // ClapTrap *base = &obj;//copy ctor chi kanchvum
 

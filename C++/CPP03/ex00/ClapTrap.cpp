@@ -12,7 +12,6 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hit_points(10), _energy_poi
 ClapTrap::ClapTrap(const ClapTrap& other)
 {
     std::cout << "copy ctor is called" << std::endl;
-    // *this = other;//lav praktika chi
     this->_name = other._name;
     this->_hit_points = other._hit_points;
     this->_energy_points = other._energy_points;
@@ -47,6 +46,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
     if (this->_hit_points > 0 && this->_energy_points > 0)
     {
+        std::cout << "takeDamage is called" << std::endl;
         if (amount >= INT_MAX)
         {
             this->_hit_points = 0;
@@ -60,7 +60,6 @@ void ClapTrap::takeDamage(unsigned int amount)
             this->_hit_points -= amount;
             std::cout << "exav";
         }
-        std::cout << "takeDamage is called" << std::endl;
     // std::cout << "current hit_points = " << this->_hit_points << std::endl;//checki hamar heto kmaqres handzneluc
     }
     else
@@ -92,5 +91,5 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "dtor is called" << std::endl;
+    std::cout << "ClapTrap dtor is called" << std::endl;
 }

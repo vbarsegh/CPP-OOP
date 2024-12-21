@@ -32,7 +32,19 @@ unsigned int size = 4;
 		i++;
 	}
 	std::cout << "\033[34m---------------------------------------------\033[0m" << std::endl;
-	
+	// Cat cat1;
+	// cat1.sett("Murka");
+	// Cat new_obj(cat1);
+	// cat1.gett();
+	// new_obj.gett();
+
+	Cat cat1;
+	cat1.sett("Murka");
+	Cat new_obj;
+	new_obj = cat1;
+	cat1.gett();
+	new_obj.gett();
+
 	i = 0;
 	std::cout << std::endl;
 	std::cout << "\033[31mDeleting the array\033[0m" << std::endl;

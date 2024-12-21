@@ -30,10 +30,9 @@ public:
     Fixed operator-(const Fixed& other) const;
     Fixed operator*(const Fixed& other) const;
     Fixed operator/(const Fixed& other) const;
-	Fixed operator++(int);// Постфиксный инкремент,Этот оператор принимает фиктивный параметр int, чтобы отличить его от префиксного инкремента.
-    Fixed& operator++();//Префиксный инкремент
-    //Обе функции возвращают ссылку на текущий объект (Fixed&), что позволяет использовать их в цепочках операций:
-	Fixed& operator--();// Префиксный декремент
+	Fixed operator++(int);
+    Fixed& operator++();
+	Fixed& operator--();
 	Fixed operator--(int);// Постфиксный декремент
 	static Fixed& min(Fixed& f1, Fixed& f2);
 	static const Fixed& min(const Fixed& f1, const Fixed& f2);

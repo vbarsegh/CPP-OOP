@@ -5,7 +5,7 @@ int main()
 {
     DiamondTrap obj("ANRY");
     obj.attack("henry");
-    std::cout << "ENERGY: " << obj.attackdamage() << std::endl;
+    // std::cout << "ENERGY: " << obj.attackdamage() << std::endl;
 
     // std::cout << "\n\n";
     // obj.whoAmI();

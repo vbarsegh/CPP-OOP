@@ -6,7 +6,7 @@ Cat::Cat()
     std::cout << "Cat default ctor is called" << std::endl;
 }
 
-Cat::Cat(const Cat&  other) : Animal(other)
+Cat::Cat(const Cat& other) : Animal(other)
 {
     std::cout << "Cat copy ctor is called" << std::endl;
     // type = other.type;
@@ -25,7 +25,6 @@ void    Cat::makeSound() const
 {
     std::cout << "Cat::myaaauuu" << std::endl;
 }
-
 
 Cat::~Cat()
 {

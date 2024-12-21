@@ -17,7 +17,7 @@ public:
     using ScavTrap::attack;
     void whoAmI();
     ~DiamondTrap();
-    int attackdamage() { 
-        return (_attack_damage);
-    }
+    // int attackdamage() { 
+    //     return (_attack_damage);
+    // }
 };

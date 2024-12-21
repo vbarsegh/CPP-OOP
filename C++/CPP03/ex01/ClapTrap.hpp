@@ -19,10 +19,9 @@ class ClapTrap
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
         //getter
-        std::string get_name(){ return _name;}
-        int get_int_member(){return _hit_points;}
+        // std::string get_name(){ return _name;}
+        // int get_int_member(){return _hit_points;}
 
-        /// @
         virtual ~ClapTrap();
 };
 

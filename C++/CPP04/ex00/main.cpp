@@ -44,7 +44,7 @@ int main()
     meta->makeSound();
     delete meta;
     delete j;
-    system("leaks Polymorphism");
+    // system("leaks Polymorphism");
     delete i;
 
     // const Animal* meta = new Animal();
