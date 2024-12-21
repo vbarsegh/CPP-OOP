@@ -21,7 +21,7 @@ void    PhoneBook::set_members(int i)
     this->obj[i].set_nick_name();
     this->obj[i].set_phone_num();
     this->obj[i].set_secret();
-	if (this->all_count_of_contacts < 3)//8
+	if (this->all_count_of_contacts < 8)
         this->all_count_of_contacts++;
 }
 
@@ -81,7 +81,7 @@ void    PhoneBook::get_all_contact()
         {
             while (ind < 0 || ind >= all_count_of_contacts || check_len_i(i) != 1)
             {
-                std::cout << "Please say what (correct) index qez khetaqrqreg@ -> ";
+                std::cout << "Please say what index qez khetaqrqreg@ -> ";
                 getline(std::cin, i);
                 if (std::cin.eof())
                     exit(1);

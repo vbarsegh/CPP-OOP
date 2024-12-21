@@ -11,7 +11,7 @@ class PhoneBook
 {
     private:
 		int	all_count_of_contacts;
-        Contact obj[3];//esi 8ksarqes handzneluc
+        Contact obj[8];
     public:
     	PhoneBook();
     	~PhoneBook();

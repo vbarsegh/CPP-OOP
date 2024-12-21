@@ -19,7 +19,7 @@ int main()
             break;
         if (str_in == "ADD")
         {
-            if (i == 3)//8
+            if (i == 8)
                 i = 0;
             user.set_members(i);
             i++;

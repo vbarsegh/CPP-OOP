@@ -23,8 +23,6 @@ class Contact
 		std::string	get_nick_name();
 		std::string	get_phone_num();
 		std::string	get_secret();
-
-
 };
 
 #endif

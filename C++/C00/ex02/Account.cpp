@@ -113,7 +113,6 @@ int		Account::checkAmount( void ) const
 	return (1);
 }
 
-
 void	Account::displayStatus( void ) const
 {
 	_displayTimestamp();
