@@ -18,7 +18,7 @@
 //     void*   ptr_v = reinterpret_cast<void*>(ptr_a);
 // }
 
-struct point
+struct point2D
 {
     int x;
     int y;
@@ -31,7 +31,9 @@ struct point3D
 
 int main()
 {
-    point pt {1, 2};
-    point3D* ptr_3d = reinterpret_cast<point3D *>(&pt);
-    point3D& lnk_3d = reinterpret_cast<point3D &>(pt);
+    point2D ptr_2d{1, 2};
+    point3D* ptr_3d = reinterpret_cast<point3D *>(&ptr_2d);
+    // point3D* ptr_3d = static_cast<point3D *>(&ptr_2d);//error,bayc static_cast.cpp-um cuyc ktam vonc anenq vor karananq static_castov el karananq anenq
+
+    point3D& lnk_3d = reinterpret_cast<point3D &>(ptr_2d);
 }
