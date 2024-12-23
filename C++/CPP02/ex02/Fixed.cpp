@@ -119,25 +119,25 @@ bool Fixed::operator!=(const Fixed& other) const
 // }kveradarcneinq jnjvox obyekti hascen,xi jnjvox,vortev lokal popoxakana ClassName result-@,isk lokalnery henc skopken prcav maqrvuma hishoxutyunic
 
 
-Fixed Fixed::operator+(const Fixed& other) const
+const Fixed Fixed::operator+(const Fixed& other) const
 {
     Fixed res(this->toFloat() + other.toFloat());//xi toFloat-ov?
     return (res);
 }
 
-Fixed Fixed::operator-(const Fixed& other) const
+const Fixed Fixed::operator-(const Fixed& other) const
 {
     Fixed res(this->toFloat() - other.toFloat());
     return (res);
 }
 
-Fixed Fixed::operator*(const Fixed& other) const
+const Fixed Fixed::operator*(const Fixed& other) const
 {
     Fixed res(this->toFloat() * other.toFloat());
     return (res);
 }
 
-Fixed Fixed::operator/(const Fixed& other) const
+const Fixed Fixed::operator/(const Fixed& other) const
 {
     // if (other.fixed_point_value == 0)
     // {
@@ -149,7 +149,7 @@ Fixed Fixed::operator/(const Fixed& other) const
 }
 
 //////
-Fixed& Fixed::operator++()
+const Fixed& Fixed::operator++()
 {
     // float num = this->toFloat();
     // num++;
@@ -158,7 +158,7 @@ Fixed& Fixed::operator++()
     return (*this);
 }
 
-Fixed Fixed::operator++(int)
+const Fixed Fixed::operator++(int)
 {
     Fixed   temp;
 
@@ -168,7 +168,7 @@ Fixed Fixed::operator++(int)
 }
 
 
-Fixed& Fixed::operator--()
+const Fixed& Fixed::operator--()
 {
     float num = this->toFloat();
     num--;
@@ -176,7 +176,7 @@ Fixed& Fixed::operator--()
     return (*this);
 }
 
-Fixed Fixed::operator--(int)
+const Fixed Fixed::operator--(int)
 {
     Fixed   temp;
 

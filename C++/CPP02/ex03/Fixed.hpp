@@ -26,14 +26,14 @@ public:
     bool operator<=(const Fixed& other) const;
     bool operator==(const Fixed& other) const;
     bool operator!=(const Fixed& other) const;
-    Fixed operator+(const Fixed& other) const;
-    Fixed operator-(const Fixed& other) const;
-    Fixed operator*(const Fixed& other) const;
-    Fixed operator/(const Fixed& other) const;
-    Fixed& operator++();//Префиксный инкремент
-	Fixed operator++(int);// Постфиксный инкремент
-	Fixed& operator--();// Префиксный декремент
-	Fixed operator--(int);// Постфиксный декремент
+    const Fixed operator+(const Fixed& other) const;
+    const Fixed operator-(const Fixed& other) const;
+    const Fixed operator*(const Fixed& other) const;
+    const Fixed operator/(const Fixed& other) const;
+    const Fixed& operator++();//Префиксный инкремент
+	const Fixed operator++(int);// Постфиксный инкремент
+	const Fixed& operator--();// Префиксный декремент
+	const Fixed operator--(int);// Постфиксный декремент
 	static Fixed& min(Fixed& f1, Fixed& f2);
 	static const Fixed& min(const Fixed& f1, const Fixed& f2);
 	static Fixed& max(Fixed& f1, Fixed& f2);

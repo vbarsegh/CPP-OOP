@@ -7,6 +7,7 @@ int main( void ) {
     std::cout << a << std::endl;
     std::cout << ++a << std::endl;
     std::cout << a << std::endl;
+    (b+a) = a;
     std::cout << a++ << std::endl;
     std::cout << a << std::endl;
     std::cout << b << std::endl;
