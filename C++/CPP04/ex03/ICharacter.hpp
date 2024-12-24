@@ -1,5 +1,6 @@
- #pragma once
+#pragma once
 
+#include "AMateria.hpp"
 
 class ICharacter
 {
@@ -9,7 +10,7 @@ class ICharacter
     virtual void equip(AMateria* m) = 0;
     virtual void unequip(int idx) = 0;
     virtual void use(int idx, ICharacter& target) = 0;
-
-    ICharacter(const ICharacter&) = delete; // Запретить копирование
-    ICharacter& operator=(const ICharacter&) = delete; 
+    virtual AMateria* getMateria(int idx) const = 0;
+    // ICharacter(const ICharacter&) = delete; // Запретить копирование
+    // ICharacter& operator=(const ICharacter&) = delete; //delete-@ 11 standarta,kmaqres!
 };

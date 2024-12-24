@@ -1,7 +1,9 @@
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 AMateria::AMateria()
 {
+    type = "default";   
     std::cout << "AMateria default ctor is called" << std::endl;
 }
 
@@ -13,7 +15,7 @@ AMateria::AMateria(std::string const& type)
 AMateria::AMateria(const AMateria&  other)
 {
     std::cout << "AMateria copy ctor is called" << std::endl;
-    type = other.type;//?
+    type = other.type;
 }
 
 AMateria& AMateria::operator=(const AMateria& other)
@@ -21,7 +23,7 @@ AMateria& AMateria::operator=(const AMateria& other)
     std::cout << "AMateria copy assignment is called" << std::endl;
     if (this == &other)
         return (*this);
-    this->type = other.type;//?
+    this->type = other.type;
     return (*this);
 }
 
@@ -39,5 +41,4 @@ void AMateria::use(ICharacter& target)
 AMateria::~AMateria()
 {
     std::cout << "AMateria dtor is called" << std::endl;
-
 }

@@ -1,11 +1,12 @@
 #include "Cure.hpp"
+#include "ICharacter.hpp"
 
 Cure::Cure()
 {
     this->type = "cure";
     std::cout << "Cure default ctor is called" << std::endl;
 }
-//:AMateria(other)stex senc chenq anum,vortev mer base class AMaterian abstracta u ira obyekt chenq kara stexcenq
+
 Cure::Cure(const Cure&  other) : AMateria(other)
 {
     std::cout << "Cure copy ctor is called" << std::endl;
@@ -24,15 +25,15 @@ Cure& Cure::operator=(const Cure& other)
 
 void Cure::use(ICharacter& target)
 {
-    std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
+    std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 
 AMateria* Cure::clone() const
 {
-    // Cure* cure = new Cure();
-    // cure->type = this->getType();
+	std::cout << "Cure clone Function Called" << std::endl;
+    // Cure* cure = new Cure();  
     // return (cure);
-    return (new Cure(*this));
+    return (new Cure(*this));//Cure-i copy ctori kanch
 }
 
 Cure::~Cure()
