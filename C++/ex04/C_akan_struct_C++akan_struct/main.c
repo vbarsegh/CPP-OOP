@@ -10,7 +10,7 @@ typedef struct A
         int x;
 	// public://ese chi chanachum zut imananq vor publica ira access specifier=@
 		// A(){std::cout <<" ctor";}
-		// void get(){std::cout << "ye";}
+		void get(){std::cout << "ye";}
 		// ~A(){std::cout << "dtor";}
 }A;
 int main()

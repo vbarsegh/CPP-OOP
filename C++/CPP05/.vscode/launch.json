@@ -1,0 +1,54 @@
+// {
+//     // Use IntelliSense to learn about possible attributes.
+//     // Hover to view descriptions of existing attributes.
+//     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "type": "lldb",
+//             "request": "launch",
+//             "name": "Debug",
+//             "program": "${workspaceFolder}/Bureaucrat",
+//             "args": [],
+//             "cwd": "${workspaceFolder}"
+//         }
+//     ]
+// }
+
+// {
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "type": "lldb",  // Используем LLDB для отладки
+//             "request": "launch",
+//             "name": "Debug",
+//             "program": "${workspaceFolder}/Bureaucrat",  // Путь к исполняемому файлу
+//             "args": [],
+//             "cwd": "${workspaceFolder}",
+//             // "stopAtEntry": true,  // Остановим выполнение на первой строке программы
+//             // "externalConsole": true,  // Использовать внешнюю консоль для ввода/вывода
+//             "preLaunchTask": "build"  // Запускаем задачу "build" перед отладкой
+//         }
+//     ]
+// }
+
+
+
+{
+    "label": "build",
+    "type": "shell",
+    "command": "clang++",
+    "args": [
+        "-std=c++14",
+        "-g",
+        "main.cpp",
+        "Bureaucrat.cpp",  // Убедитесь, что добавили все необходимые файлы
+        "-o",
+        "${workspaceFolder}/Bureaucrat"
+    ],
+    "group": {
+        "kind": "build",
+        "isDefault": true
+    },
+    "problemMatcher": ["$gcc"]
+}
