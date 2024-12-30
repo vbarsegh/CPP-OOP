@@ -1,10 +1,10 @@
-NAME = Bureaucrat
+NAME = Form
 
 CC = c++
 
 FLAGS = -g3 -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp Bureaucrat.cpp
+SRC = main.cpp Bureaucrat.cpp Form.cpp
 
 OBJS = ${SRC:.cpp=.o}
 
@@ -14,7 +14,7 @@ ${NAME}: ${OBJS}
 	${CC} ${FLAGS} ${OBJS} -o ${NAME}
 
 
-%.o:%.cpp Makefile Bureaucrat.hpp
+%.o:%.cpp Makefile Bureaucrat.hpp Form.hpp
 	${CC} ${FLAGS} -c  $< -o $@
 
 clean:

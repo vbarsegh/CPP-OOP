@@ -25,6 +25,7 @@ public:
     };
     std::string getName() const;
     int getGrade() const;
+    void	setGrade(int grade);
     void    increment_grade();
     void    decrement_grade();
     ~Bureaucrat();

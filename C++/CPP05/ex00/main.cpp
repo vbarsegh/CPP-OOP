@@ -14,7 +14,7 @@ int main() {
 		std::cout << "\033[0;031m" << e.what() << "\033[0m" << std::endl;
 	}
 }
-std::cout << '\n';
+std::cout << std::endl;
 ///////
 //	Testing bureaucrat set too low grade
 {
@@ -31,7 +31,7 @@ std::cout << '\n';
 }
 std::cout << '\n';
 //////////
-//	Testing bureaucrat normal grade
+	// Testing bureaucrat normal grade
 {
 	std::cout << "\033[0;32m" << "Testing bureaucrat normal grade" << "\033[0m" << std::endl;
 	try {
@@ -50,6 +50,7 @@ std::cout << '\n';
 	}
 }//////////
 std::cout << std::endl;
+{
     try {
         Bureaucrat b1("Alice", 2);
         std::cout << b1 << std::endl;
@@ -59,9 +60,10 @@ std::cout << std::endl;
 
         b1.increment_grade(); // Попытка повысить выше 1 — выброс исключения
     } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        std::cout << "\033[0;031m" << e.what() << "\033[0m" << std::endl;
     }
-
+}
+{
     try {
         Bureaucrat b2("Bob", 149);
         std::cout << b2 << std::endl;
@@ -71,8 +73,8 @@ std::cout << std::endl;
 
         b2.decrement_grade(); // Попытка понизить ниже 150 — выброс исключения
     } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+       std::cout << "\033[0;031m" << e.what() << "\033[0m" << std::endl;
     }
-
+}
     return 0;
 }
