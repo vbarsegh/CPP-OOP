@@ -20,25 +20,49 @@ Intern& Intern::operator=(const Intern& other)
 
 AForm* Intern::makeForm(const std::string nameForm, const std::string target)
 {
-	std::pair<const std::string, AForm* (*)(const std::string&)> formPairs[DESCENDANTS_COUNT] = {
-		{"robotomy request",&PresidentialPardonForm::createObjInHeap},
-		{"shrubbery creation", &RobotomyRequestForm::createObjInHeap},
-		{"presidential pardon", &ShrubberyCreationForm::createObjInHeap},
-	};
-	// formPairs[0] = {"robotomy request", [](const std::string& target) {return new RobotomyRequestForm(target);}};
-	// formPairs[1] = {"shrubbery creation", [](const std::string& target) { return new ShrubberyCreationForm(target);}};
-    // formPairs[2] = {"presidential pardon", [](const std::string& target) { return new PresidentialPardonForm(target);}};
+	std::pair<std::string, AForm* (*)(const std::string&)> formPairs[DESCENDANTS_COUNT];
+	formPairs[0] = std::make_pair("robotomy request", &RobotomyRequestForm::createObjInHeap);
+	formPairs[1] = std::make_pair("presidential pardon", &PresidentialPardonForm::createObjInHeap);
+	formPairs[2] = std::make_pair("shrubbery creation", &ShrubberyCreationForm::createObjInHeap);
 
 	for (int i = 0; i < DESCENDANTS_COUNT; i++)
 	{
 		if (formPairs[i].first == nameForm)
 		{
-			std::cout << "Intern creates " << nameForm << std::endl;
-			return (formPairs[i].second(target));
+			std::cout << "Intern creates " << target << std::endl;
+			// return (formPairs[i].second(target));
+			AForm *obj = formPairs[i].second(target);
+			std::cout << "mmmmmm";
+			return (obj);
 		}
 	}
-	std::cout << "Form not found" << std::endl;
+	throw FormNotFound();
+	// std::cout << "Form not found" << std::endl;
 	return (NULL);
+}
+
+// AForm* Intern::makeForm(const std::string nameForm, const std::string target)
+// {
+// 	std::pair<std::string, AForm*(*)(const std::string&)> formPairs[DESCENDANTS_COUNT];
+// 	formPairs[0] = std::make_pair("robotomy request", &RobotomyRequestForm::createObjInHeap);
+// 	formPairs[1] = std::make_pair("presidential request", &PresidentialPardonForm::createObjInHeap);
+// 	formPairs[2] = std::make_pair("shrubbery request", &ShrubberyCreationForm::createObjInHeap);
+// 	for (int i = 0; i < DESCENDANTS_COUNT; i++)
+// 	{
+// 		if (formPairs[i].first == nameForm)
+// 		{
+// 			std::cout << "Intern creates " << nameForm << std::endl;
+//  			return formPairs[i].second(target);
+// 		}
+// 	}
+// 	std::cout << "Intern can't create form, because type doesn't match\n";
+// 	return NULL;
+// }
+
+
+const char* Intern::FormNotFound::what() const throw()
+{
+	return "Form not found";
 }
 
 Intern::~Intern()

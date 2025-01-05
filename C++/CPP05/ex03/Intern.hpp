@@ -17,4 +17,5 @@ public:
     Intern& operator=(const Intern& other);
     AForm* makeForm(const std::string nameForm, const std::string target);
     ~Intern();
+    struct FormNotFound : public std::exception {const char* what() const throw();};
 };

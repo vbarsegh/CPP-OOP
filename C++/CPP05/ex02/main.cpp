@@ -6,70 +6,70 @@
 
 
 int main() {
-// {
-//     try {
-//         ShrubberyCreationForm form("home1");
-//         Bureaucrat alice("AxAlisaAlisa", 1);
-//         // AForm importantForm("ImportantForm", 40, 20);
+{
+    try {
+        ShrubberyCreationForm form("home1");
+        Bureaucrat alice("AxAlisaAlisa", 1);
+        // AForm importantForm("ImportantForm", 40, 20);
 
-//         alice.signForm(form);
-
-
-//         form.execute(alice);
-//         // std::cout << form << std::endl;
-//     } catch (const std::exception& e) {
-//         std::cerr << "Error: " << e.what() << std::endl;
-//     }
-//     std::cout << std::endl;
-// }
-// {
-//      try {
-//         ShrubberyCreationForm form("home2");
-//         Bureaucrat alice("balalala", 149);
-//         // AForm importantForm("ImportantForm", 40, 20);
-
-//         alice.signForm(form);
+        alice.signForm(form);
 
 
-//         form.execute(alice);
-//         // std::cout << form << std::endl;
-//     } catch (const std::exception& e) {
-//         std::cerr << "Error: " << e.what() << std::endl;
-//     }
-//     std::cout << std::endl;
-// }
-// {
-//      try {
-//         ShrubberyCreationForm form("home2");
-//         Bureaucrat alice("balalala", 149);
-//         // AForm importantForm("ImportantForm", 40, 20);
+        form.execute(alice);
+        // std::cout << form << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+}
+{
+     try {
+        ShrubberyCreationForm form("home2");
+        Bureaucrat alice("balalala", 149);
+        // AForm importantForm("ImportantForm", 40, 20);
 
-//         alice.signForm(form);
-
-
-//         // form.execute(alice);//esi anun enq cherez Bureaucrat alice-i ognutyamb
-//         alice.executeForm(form);//dusa galu catch(const AForm::FormNotSignedException& e)-ic
-//     } catch (const std::exception& e) {
-//         std::cerr << "Error: " << e.what() << std::endl;
-//     }
-    // std::cout << std::endl;
-// }
-// {
-//      try {
-//         ShrubberyCreationForm form("home2");
-//         Bureaucrat alice("balalala", 139);
-//         // AForm importantForm("ImportantForm", 40, 20);
-
-//         alice.signForm(form);
+        alice.signForm(form);
 
 
-//         // form.execute(alice);//esi anun enq cherez Bureaucrat alice-i ognutyamb
-//         alice.executeForm(form);//dusa galu catch(const AForm::GradeTooLowException& e)-ic
-//     } catch (const std::exception& e) {
-//         std::cerr << "Error: " << e.what() << std::endl;
-//     }
-    // std::cout << std::endl;
-// }
+        form.execute(alice);
+        // std::cout << form << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+}
+{
+     try {
+        ShrubberyCreationForm form("home2");
+        Bureaucrat alice("balalala", 149);
+        // AForm importantForm("ImportantForm", 40, 20);
+
+        alice.signForm(form);
+
+
+        // form.execute(alice);//esi anun enq cherez Bureaucrat alice-i ognutyamb
+        alice.executeForm(form);//dusa galu catch(const AForm::FormNotSignedException& e)-ic
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+}
+{
+     try {
+        ShrubberyCreationForm form("home2");
+        Bureaucrat alice("balalala", 139);
+        // AForm importantForm("ImportantForm", 40, 20);
+
+        alice.signForm(form);
+
+
+        // form.execute(alice);//esi anun enq cherez Bureaucrat alice-i ognutyamb
+        alice.executeForm(form);//dusa galu catch(const AForm::GradeTooLowException& e)-ic
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+}
 {
  try {
         Bureaucrat john("John", 40); // Уровень достаточно высокий

@@ -2,7 +2,7 @@ NAME = Intern
 
 CC = c++
 
-FLAGS = -g3 -Wall -Wextra -Werror -std=c++11
+FLAGS = -g3 -Wall -Wextra -Werror -std=c++98
 
 SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 
