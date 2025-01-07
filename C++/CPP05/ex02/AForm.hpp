@@ -39,8 +39,8 @@ public:
 
 	void	check_grade(int);
 	void	beSigned(const Bureaucrat& brcrt);
-	void	CheckRequirements(Bureaucrat const & executor) const;
-	virtual void execute(Bureaucrat const & executor) const = 0;
+	// void	CheckRequirements(Bureaucrat const & executor) const;
+	virtual void execute(Bureaucrat const & executor) const = 0;//CheckRequirements esi vor grel ei prazvec petq chi,et nuyn logikan yst subjecti pti grver henc es pure virtual execute-i mej
 };
 
 std::ostream& operator<<(std::ostream& out, const AForm& form);

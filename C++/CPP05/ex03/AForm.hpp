@@ -39,7 +39,7 @@ public:
 
 	void	check_grade(int);
 	void	beSigned(const Bureaucrat& brcrt);
-	void	CheckRequirements(Bureaucrat const & executor) const;
+	// void	CheckRequirements(Bureaucrat const & executor) const;
 	virtual void execute(Bureaucrat const & executor) const = 0;
 };
 

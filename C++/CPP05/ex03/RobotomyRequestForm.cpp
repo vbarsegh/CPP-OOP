@@ -33,7 +33,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	CheckRequirements(executor);
+	AForm::execute(executor);
 	std::cout << "BZZZZZZZZZZ... drilling noises..." << std::endl;
 
     srand(time(NULL)); // Инициализация генератора случайных чисел с использованием времени

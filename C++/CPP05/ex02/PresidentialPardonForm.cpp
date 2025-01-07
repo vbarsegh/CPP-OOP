@@ -28,7 +28,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	CheckRequirements(executor);
+	AForm::execute(executor);
     std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 

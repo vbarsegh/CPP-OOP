@@ -32,7 +32,6 @@ AForm* Intern::makeForm(const std::string nameForm, const std::string target)
 			std::cout << "Intern creates " << target << std::endl;
 			// return (formPairs[i].second(target));
 			AForm *obj = formPairs[i].second(target);
-			std::cout << "mmmmmm";
 			return (obj);
 		}
 	}

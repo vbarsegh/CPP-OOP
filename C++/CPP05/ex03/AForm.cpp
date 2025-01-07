@@ -100,7 +100,15 @@ void    AForm::beSigned(const Bureaucrat& brcrt)
         throw GradeTooLowException();
 }
 
-void	AForm::CheckRequirements(Bureaucrat const & executor) const
+// void	AForm::CheckRequirements(Bureaucrat const & executor) const
+// {
+//     if (this->get_is_signed() == false)
+// 		throw FormNotSignedException();
+// 	if (executor.getGrade() > this->get_grade_to_execute())
+// 		throw GradeTooLowException();
+// }
+
+void	AForm::execute(Bureaucrat const & executor) const
 {
     if (this->get_is_signed() == false)
 		throw FormNotSignedException();

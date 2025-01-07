@@ -13,7 +13,6 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 	${CC} ${FLAGS} ${OBJS} -o ${NAME}
 
-
 %.o:%.cpp Makefile Bureaucrat.hpp
 	${CC} ${FLAGS} -c  $< -o $@
 
