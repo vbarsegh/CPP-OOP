@@ -53,7 +53,10 @@ void ScalarConverter::convert(const std::string& literal)
 
 int check_type(const std::string& literal)
 {
-	if (literal.size() == 1 && isprint(literal[0]) && !isdigit(literal[0]))
+	cout << "li = " <<literal<<endl;
+	cout << "li = " <<literal.size()<<endl;
+
+ 	if (literal.size() == 1 && !isdigit(literal[0]))
 		return (0);//char
 	if (allElemsIsDigit(literal) > 0)
 	{
@@ -64,7 +67,7 @@ int check_type(const std::string& literal)
 		return (2);//float
 	if (isDouble(literal) > 0)
 		return (3);
-	cout << "mmmmmmm";
+	cout << "mmmmmmm" <<endl;
 	return (777);
 }
 ///////////////////////
@@ -164,7 +167,13 @@ int contain_digit_dot(const std::string& literal)
 void	convert_char(const std::string& literal)
 {
 	char c = literal[0];
-	cout << "char: " << literal << endl;
+	if(!isprint(literal[0]))
+		cout << "char: none displayable" << endl;
+	else if(!isascii(literal[0]))
+		cout << "char: impossible" << endl;
+
+	else
+		cout << "char: " << literal << endl;
 	cout << "int: " << static_cast<int>(c) << endl;
 	cout << "float: " << static_cast<float>(c) << ".0f" << endl;
 	cout << "double: " << static_cast<double>(c) << ".0" << endl;
@@ -172,14 +181,22 @@ void	convert_char(const std::string& literal)
 
 void	convert_int(const std::string& literal)
 {
-	long long num = std::atoi(literal.c_str());
-	if (num < -2147483648 || num > 2147483647 || literal.size() > 10)
-		cout << "impossible" << endl;
+	std::stringstream ss(literal);
+	long long num;
+	ss >> num;
+	if (ss.fail()) 
+    	std::cout << "Error: Invalid number format" << std::endl;
+	cout << "num="<<num<<endl;
 	if (num >= 0 && num <= 31)
 		cout << "char: Non displayable" << endl;
-	else
+	else if (num >= 32 && num <= 127)
 		cout << "char: " << static_cast<char>(num) << endl;
-	cout << "int: " << num << endl;
+	else
+		cout << "char: inpossible" << endl;
+	if (num < -2147483648 || num > 2147483647 )
+		cout << "int: impossible" << endl;
+	else
+		cout << "int: " << num << endl;
 	cout << "float: " << static_cast<float>(num) << ".0f" << endl;
 	cout << "double: " << static_cast<double>(num) << ".0" << endl;
 }
