@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstddef>
 #include <sstream>
+#include <iomanip>
 class ScalarConverter
 {
 private:
@@ -22,6 +23,8 @@ int allElemsIsDigit(const std::string& literal);
 void	convert_int(const std::string& literal);
 
 int isFloat(const std::string& literal);
+void	convert_float(std::string& literal);
+
 int contain_digit_dot_f(const std::string& literal);
 int count_of_dot(const std::string& literal);
 int count_of_f(const std::string& literal);

@@ -10,5 +10,7 @@ int main(int argc, char** argv)
     else
     {
         ScalarConverter::convert(argv[1]);
+        double nu = .123456789987654321;
+        std::cout << "nu = " <<nu << std::endl;
     }
 }
