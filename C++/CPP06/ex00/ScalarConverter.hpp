@@ -26,7 +26,8 @@ int isFloat(const std::string& literal);
 void	convert_float(std::string& literal);
 
 int contain_digit_dot_f(const std::string& literal);
-int count_of_dot(const std::string& literal);
-int count_of_f(const std::string& literal);
+int count_of_char(const std::string& literal, char c);
 int isDouble(const std::string& literal);
+void	convert_double(const std::string& literal);
+
 int contain_digit_dot(const std::string& literal);

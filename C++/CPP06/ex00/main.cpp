@@ -8,9 +8,12 @@ int main(int argc, char** argv)
         return (11);
     }
     else
-    {
+    {   
+        (void)argv;
+        double a = 11.f;
+        std::cout << "a = " << a << "\n";
         ScalarConverter::convert(argv[1]);
-        double nu = .123456789987654321;
-        std::cout << "nu = " <<nu << std::endl;
+        // float nu = 12123154323234567898765432345678987654345678.f;
+        // std::cout << "nu = " <<nu << std::endl;
     }
 }

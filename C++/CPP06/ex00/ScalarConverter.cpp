@@ -1,3 +1,4 @@
+
 #include "ScalarConverter.hpp"
 using std::cout;
 using std::endl;
@@ -46,6 +47,7 @@ void ScalarConverter::convert(const std::string& literal)
 		case 3:
 			//
 			std::cout << "x равно 3" << std::endl;
+			convert_double(literal);
 			break ;
 		default:
 			std::cout << "char: impossible" << std::endl;
@@ -68,7 +70,10 @@ int check_type(const std::string& literal)
 		return (1);//int
 	}
 	if (isFloat(literal) > 0)
+	{
+		cout << "ekav\n";
 		return (2);//float
+	}
 	if (isDouble(literal) > 0)
 		return (3);
 	cout << "mmmmmmm" <<endl;
@@ -113,12 +118,14 @@ int allElemsIsDigit(const std::string& literal)
 /////////////////////
 int isFloat(const std::string& literal)
 {
-
+	if (literal[0] == '.' && literal[1] == 'f')
+		return (-1);//float f = .f;//error
 	if (contain_digit_dot_f(literal) != 1
-		|| count_of_f(literal) != 1 || count_of_dot(literal) != 1)
+		|| count_of_char(literal, '.') != 1 || count_of_char(literal, 'f') != 1)
 		return (-1);
 	if (literal[literal.size() - 1] != 'f')//esi u if eri hertakanutyuny lucuma en harcy vor .-@ f-ic araja 
 		return (-1);
+	cout << "xiii\n";
 	return (1);
 }
 
@@ -134,12 +141,12 @@ int contain_digit_dot_f(const std::string& literal)
 	return (1);
 }
 
-int count_of_dot(const std::string& literal)
+int count_of_char(const std::string& literal, char c)
 {
 	int count = 0;
 	for (size_t i = 0; i < literal.size(); i++)
 	{
-		if (literal[i] == '.')
+		if (literal[i] == c)
 			count++;
 	}
 	if (count != 1)
@@ -147,25 +154,14 @@ int count_of_dot(const std::string& literal)
 	return (1);
 }
 
-int count_of_f(const std::string& literal)
-{
-	int count = 0;
-	for (size_t i = 0; i < literal.size(); i++)
-	{
-		if (literal[i] == 'f')
-			count++;
-	}
-	if (count != 1)
-		return (-1);
-	return (1);
-}
+
 //////////////////////////////
 
 ////////////
 int isDouble(const std::string& literal)
 {
 
-	if (contain_digit_dot(literal) != 1 || count_of_dot(literal) != 1)
+	if (contain_digit_dot(literal) != 1 || count_of_char(literal, '.') != 1)
 		return (-1);
 	return (1);
 }
@@ -234,46 +230,107 @@ void	convert_float(std::string& literal)
 	float f;
 
 	ss >> f;
-	if (ss.fail()) 
+	if (ss.fail())
+	{
     	std::cout << "Error: Invalid number format" << std::endl;
-	int flag = 1;
+		// return ();
+	}
+	int all_zeros = 1;
 	cout << "f = " << f << endl;
 	unsigned int ind = literal.find('.');
-	cout << ind << endl;
-	if (ind <= 7)
+	cout << "s = " <<literal.size() << endl;
+	cout << "s = " << ind << endl;
+
+	ind++;
+
+	while (ind < literal.size())
 	{
-		// int count = 7 - ind;
-		ind++;
-		while (ind < literal.size())
-		{
-			if (literal[ind] == '0')
-				ind++;
-			else
-			{
-				cout << "lava";
-				flag = 0;
-				break ;
-			}
-		}
-		if (flag == 0)
-			cout << "char: impossible" << endl;
+		if (literal[ind] == '0')
+			ind++;
 		else
 		{
-			int num = static_cast<int>(f);
-			if (num > 127 || num < 0)
-			cout << "char: impossible" << endl;
-			else if (isprint(num))
-				cout << "char: " << static_cast<char>(num) << endl;
-			else
-				cout << "char: Non displayable" << endl;
-			// cout << "char: " << static_cast<char>(f) << endl;
+			all_zeros = 0;
+			break ;
 		}
-		if (static_cast<long long>(f) < -2147483648 || static_cast<long long>(f) > 2147483647)
-			cout << "int: impossible" << endl;
+	}
+	if (all_zeros == 0)
+		cout << "char: impossible" << endl;
+	else
+	{
+		int num = static_cast<int>(f);
+		cout << "num = " << num << endl;
+		if (num > 127 || num < 0)
+		cout << "char: impossible" << endl;
+		else if (isprint(num))
+			cout << "char: " << static_cast<char>(num) << endl;
 		else
-			cout << "int: " << static_cast<int>(f) << endl;
+			cout << "char: Non displayable" << endl;
+	}
+	if (static_cast<long long>(f) < -2147483648 || static_cast<long long>(f) > 2147483647)
+		cout << "int: impossible" << endl;
+	else
+		cout << "int: " << static_cast<int>(f) << endl;
+	if (all_zeros == 1)
+	{
+		cout << "float: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1)<< f << "f" << endl;
+		std::cout << "doubleeee: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1) << static_cast<double>(f) << std::endl;
+	}
+	else
+	{
 		cout << "float: " << f << "f" << endl;
-		cout << "double: " << static_cast<double>(f) << endl;
- 	}
-	
+		cout << "doublee: " << static_cast<double>(f) << endl;
+	}
+}
+
+void	convert_double(const std::string& literal)
+{
+	std::stringstream ss(literal);
+	double d;
+
+	ss >> d;
+	if (ss.fail())
+	{
+    	std::cout << "Error: Invalid number format" << std::endl;
+		// return ();
+	}
+	int all_zeros = 1;
+	unsigned int ind = literal.find('.');
+	ind++;
+	while (ind < literal.size())
+	{
+		if (literal[ind] == '0')
+			ind++;
+		else
+		{
+			all_zeros = 0;
+			break ;
+		}
+	}
+	if (all_zeros == 0)
+		cout << "char: impossible" << endl;
+	else
+	{
+		int num = static_cast<int>(d);
+		cout << "num = " << num << endl;
+		if (num > 127 || num < 0)
+		cout << "char: impossible" << endl;
+		else if (isprint(num))
+			cout << "char: " << static_cast<char>(num) << endl;
+		else
+			cout << "char: Non displayable" << endl;
+	}
+	if (static_cast<long long>(d) < -2147483648 || static_cast<long long>(d) > 2147483647)
+		cout << "int: impossible" << endl;
+	else
+		cout << "int: " << static_cast<int>(d) << endl;
+	// if (all_zeros == 1)
+	// {
+	// 	cout << "float: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1)<< f << "f" << endl;
+	// 	std::cout << "doubleeee: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1) << static_cast<double>(d) << std::endl;
+	// }
+	// else
+	{
+		cout << "float: " << static_cast<float>(d) << "f" << endl;
+		cout << "double: " << d << endl;
+	}
 }
