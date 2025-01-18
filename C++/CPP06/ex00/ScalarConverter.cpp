@@ -15,8 +15,10 @@ ScalarConverter::ScalarConverter(const ScalarConverter& other)
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 {
-	(void)other;
-	std::cout << "ScalarConverter operator= is called" << std::endl;
+	if (this != & other)
+	{
+		std::cout << "ScalarConverter operator= is called" << std::endl;
+	}
 	return (*this);
 }
 
@@ -50,10 +52,28 @@ void ScalarConverter::convert(const std::string& literal)
 			convert_double(literal);
 			break ;
 		default:
+		if (literal == "-inff" || literal == "-inf"
+			|| literal == "inff" || literal == "inf")
+		{
+			cout << "char: " << "impossible" << endl;
+			cout << "int: " << "impossible" << endl;
+			cout << "float: " << "inff" << endl;
+			cout << "double: " << "inf" << endl;
+		}
+		else if (literal == "nanf" || literal == "nan")
+		{
+			cout << "char: " << "impossible" << endl;
+			cout << "int: " << "impossible" << endl;
+			cout << "float: " << "nanf" << endl;
+			cout << "double: " << "nan" << endl;
+		}
+		else
+		{
 			std::cout << "char: impossible" << std::endl;
 			std::cout << "int: nan" << std::endl;
 			std::cout << "float: nanf" << std::endl;
 			std::cout << "double: nan" << std::endl;
+		}
 	}
 }
 
@@ -78,22 +98,22 @@ int check_type(const std::string& literal)
 		return (3);
 	cout << "mmmmmmm" <<endl;
 	// if (literal == "nanf" || literal == "nan")
-	if (literal == "-inff" || literal == "-inf"
-		|| literal == "inff" || literal == "inf")
-	{
-		cout << "char: " << "impossible" << endl;
-		cout << "int: " << "impossible" << endl;
-		cout << "float: " << "inff" << endl;
-		cout << "double: " << "inf" << endl;
-	}
-	else if (literal == "-nanf" || literal == "-nan"
-		|| literal == "nanf" || literal == "nan")
-	{
-		cout << "char: " << "impossible" << endl;
-		cout << "int: " << "impossible" << endl;
-		cout << "float: " << "nanf" << endl;
-		cout << "double: " << "nan" << endl;
-	}
+	// if (literal == "-inff" || literal == "-inf"
+	// 	|| literal == "inff" || literal == "inf")
+	// {
+	// 	cout << "char: " << "impossible" << endl;
+	// 	cout << "int: " << "impossible" << endl;
+	// 	cout << "float: " << "inff" << endl;
+	// 	cout << "double: " << "inf" << endl;
+	// }
+	// else if (literal == "-nanf" || literal == "-nan"
+	// 	|| literal == "nanf" || literal == "nan")
+	// {
+	// 	cout << "char: " << "impossible" << endl;
+	// 	cout << "int: " << "impossible" << endl;
+	// 	cout << "float: " << "nanf" << endl;
+	// 	cout << "double: " << "nan" << endl;
+	// }
 	return (777);
 }
 ///////////////////////
