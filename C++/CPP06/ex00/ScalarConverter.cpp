@@ -120,25 +120,39 @@ int isFloat(const std::string& literal)
 {
 	if (literal[0] == '.' && literal[1] == 'f')
 		return (-1);//float f = .f;//error
-	if (contain_digit_dot_f(literal) != 1
+	if (contain_only_these_simbols(literal, ".f") != 1
 		|| count_of_char(literal, '.') != 1 || count_of_char(literal, 'f') != 1)
 		return (-1);
 	if (literal[literal.size() - 1] != 'f')//esi u if eri hertakanutyuny lucuma en harcy vor .-@ f-ic araja 
 		return (-1);
-	cout << "xiii\n";
 	return (1);
 }
 
-int contain_digit_dot_f(const std::string& literal)
+int contain_only_these_simbols(const std::string& literal, const char* sim)
 {
 	for (size_t i = 0; i < literal.size(); i++)
 	{
+		if (i == 0 && (literal[i] == '+' || literal[i] == '-'))
+			continue;
 		if ((literal[i] >='0' && literal[i] <= '9')
-			|| literal[i] == 'f' || literal[i] == '.')
+			|| check_sim(literal[i], sim) == 1)
 			continue;
 		return (-1);
 	}
+	cout << "beeeeeee\n";
 	return (1);
+}
+
+int check_sim(char lit, const char* sim)
+{
+	int i = 0;
+	while (sim[i])
+	{
+		if (sim[i] == lit)
+			return (1);
+		i++;
+	}
+	return (-1);
 }
 
 int count_of_char(const std::string& literal, char c)
@@ -150,8 +164,8 @@ int count_of_char(const std::string& literal, char c)
 			count++;
 	}
 	if (count != 1)
-		return (-1);
-	return (1);
+		return (count);
+	return (count);
 }
 
 
@@ -161,22 +175,22 @@ int count_of_char(const std::string& literal, char c)
 int isDouble(const std::string& literal)
 {
 
-	if (contain_digit_dot(literal) != 1 || count_of_char(literal, '.') != 1)
+	if (contain_only_these_simbols(literal, ".") != 1 || count_of_char(literal, '.') != 1)
 		return (-1);
 	return (1);
 }
 
-int contain_digit_dot(const std::string& literal)
-{
-	for (size_t i = 0; i < literal.size(); i++)
-	{
-		if ((literal[i] >= '0' && literal[i] <= '9')
-			|| literal[i] == '.')
-			continue;
-		return (-1);
-	}
-	return (1);
-}
+// int contain_digit_dot(const std::string& literal)
+// {
+// 	for (size_t i = 0; i < literal.size(); i++)
+// 	{
+// 		if ((literal[i] >= '0' && literal[i] <= '9')
+// 			|| literal[i] == '.')
+// 			continue;
+// 		return (-1);
+// 	}
+// 	return (1);
+// }
 
 //////////
 
@@ -228,7 +242,6 @@ void	convert_float(std::string& literal)
 	cout << literal.size()<<endl;
 	std::stringstream ss(literal);
 	float f;
-
 	ss >> f;
 	if (ss.fail())
 	{
@@ -240,9 +253,9 @@ void	convert_float(std::string& literal)
 	unsigned int ind = literal.find('.');
 	cout << "s = " <<literal.size() << endl;
 	cout << "s = " << ind << endl;
-
+	// if (ind == UINT_MAX)
+	// 	ind = INT_MAX - 1;
 	ind++;
-
 	while (ind < literal.size())
 	{
 		if (literal[ind] == '0')
@@ -266,14 +279,15 @@ void	convert_float(std::string& literal)
 		else
 			cout << "char: Non displayable" << endl;
 	}
+
 	if (static_cast<long long>(f) < -2147483648 || static_cast<long long>(f) > 2147483647)
 		cout << "int: impossible" << endl;
 	else
 		cout << "int: " << static_cast<int>(f) << endl;
 	if (all_zeros == 1)
 	{
-		cout << "float: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1)<< f << "f" << endl;
-		std::cout << "doubleeee: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1) << static_cast<double>(f) << std::endl;
+		cout << "float: " << std::fixed << std::setprecision(1)<< f << "f" << endl;
+		std::cout << "doubleeee: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
 	}
 	else
 	{
@@ -319,16 +333,17 @@ void	convert_double(const std::string& literal)
 		else
 			cout << "char: Non displayable" << endl;
 	}
+	cout << "xi = " << static_cast<long long>(d) << endl;
 	if (static_cast<long long>(d) < -2147483648 || static_cast<long long>(d) > 2147483647)
 		cout << "int: impossible" << endl;
 	else
 		cout << "int: " << static_cast<int>(d) << endl;
-	// if (all_zeros == 1)
-	// {
-	// 	cout << "float: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1)<< f << "f" << endl;
-	// 	std::cout << "doubleeee: " << std::fixed << std::setprecision(literal.size() - literal.find('.') - 1) << static_cast<double>(d) << std::endl;
-	// }
-	// else
+	if (all_zeros == 1)
+	{
+		cout << "float: " << static_cast<double>(d) << ".0f" << std::endl;
+		cout << "doublee: " << d << ".0" << endl;
+	}
+	else
 	{
 		cout << "float: " << static_cast<float>(d) << "f" << endl;
 		cout << "double: " << d << endl;
