@@ -36,4 +36,11 @@ int main()
     // point3D* ptr_3d = static_cast<point3D *>(&ptr_2d);//error,bayc static_cast.cpp-um cuyc ktam vonc anenq vor karananq static_castov el karananq anenq
 
     point3D& lnk_3d = reinterpret_cast<point3D &>(ptr_2d);
+
+
+
+    // int a = 42;
+    // int *ptr_a = &a;
+    // // double ptr_d = reinterpret_cast<double>(a);//error
+    // int ptr_i = reinterpret_cast<int>(a);
 }

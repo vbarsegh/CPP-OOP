@@ -73,11 +73,13 @@ int main()
     // ptr_3d->x = 3;
     // std::cout <<ptr_3d->w << std::endl;
     // std::cout <<ptr_3d->x << std::endl; 
+
     point3D ptr_3d;
-    point2D* ptr_2d = reinterpret_cast<point2D *>(&ptr_3d);
-    // point3D* ptr_3d_2 = static_cast<point3D *>(&ptr_2d);//error,bayc static_cast.cpp-um cuyc ktam vonc anenq vor karananq static_castov el karananq anenq
+    // point2D* ptr_2d = reinterpret_cast<point2D *>(&ptr_3d);
+    point2D* ptr_2d = static_cast<point2D *>(&ptr_3d);
     ptr_2d->w = 5;
-    ptr_2d->x = 3;
+    // ptr_2d->x = 3;//error
+    ptr_2d->v = 3;
     std::cout <<ptr_2d->w << std::endl;
-    std::cout <<ptr_2d->x << std::endl; 
+    std::cout <<ptr_2d->v << std::endl; 
 }
