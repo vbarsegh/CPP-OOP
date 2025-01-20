@@ -7,6 +7,10 @@ int main() {
 	try {
 		Bureaucrat ponch("Armenchik", -89);
 	}
+	// catch (std::exception& e) {
+	// 	std::cout << "\033[0;031m" << e.what() << "\033[0m" << std::endl;
+	// }//qani vor GradeTooHighException ev GradeTooLowException klasnery hamarvum en jarang std::exceptionic,compile error enq stanum, vortex asvuma vor `exception of type ‘Bureaucrat::GradeTooHighException’ will be caught by earlier handler
+	//inchy nshanakum e vor te throw lini GradeTooHighException sra obyekt te GradeTooLowException sra,mievnuynna std::exception& e catchuma da brnvelu(patchary nranc jarang linelna),dra hamar xorhurda trvum std::exceptioni(base-i) catchy dnel amenaverjum!!!!
 	catch (Bureaucrat::GradeTooHighException& e) {
 		std::cout << "\033[0;031m" << e.what() << "\033[0m" << std::endl;
 	}
