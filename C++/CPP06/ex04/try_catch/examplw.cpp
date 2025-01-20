@@ -4,7 +4,8 @@ class A
 {
     int x;
 public:
-    virtual A& foo(std::string str){std::cout << str << std::endl;}
+	A& foo(int num) { std::cout << num << std::endl; return (*this);}
+	A& foo(std::string str){std::cout << str << std::endl; return (*this);}
     void moo(std::string str){std::cout << str << std::endl;}
 };
 
@@ -12,40 +13,43 @@ class B : public A
 {
     int z;
 public:
-    B& foo(){std::cout << "pahooo" << std::endl;}
+    using A::foo; // Թույլ է տալիս օգտագործել A-ի բոլոր foo տարբերակները
+    B& foo(){std::cout << "pahooo" << std::endl;return (*this);}
 };
 
 int main()
 {
     B obj;
-
-    // obj.foo();//okeya
-    obj.A::foo("hmmmmm");//esi sxala vortev B classum mana gali std::string parametrov foo funkcia,chi gtnum u sxala tali,vochte ete nayuma tenuma B um chka gnum A-i mej mana gali gtnum
+    obj.foo();
+	obj.foo(42);//ete using@ ka okeya
+    obj.foo("axper");//ete using-@ ka B classum kashxati
+    obj.A::foo("hmmmmm");//hstak nshelu depqum`A::foo("blabla");bnakanabar xndir chi ta ev kkanchvi
+    //esi sxala vortev B classum mana gali std::string parametrov foo funkcia,chi gtnum u sxala tali,vochte ete nayuma tenuma B um chka gnum A-i mej mana gali gtnum
+    //vorpisi jaranqg dasi foo-n chcacki bazayini nuyn foo anunov funckianery ev karananq kanchenq`obj.foo("axper")-@ B classum petqe ogtagorcenq using(nayir B class@)->>>obj.foo("axper");
 }
 
+// Երբ B-ում հայտարարում եք նոր foo ֆունկցիա, այն թաքցնում է A-ում հայտարարված նույն անունով ֆունկցիան, անկախ նրանից՝ ստորագրությունները (սինտաքսը) համընկնում են, թե ոչ։ Դա պայմանավորված է C++-ի name hiding (անունների թաքցում) կանոններով։
+// Ինչպես է աշխատում name hiding-ը
+// Անունների թաքցում
+// Երբ բազային դասում (A) հայտարարված է foo(std::string) ֆունկցիան, իսկ ածանցյալ դասում (B) հայտարարվում է foo() ֆունկցիան, ածանցյալ դասը թաքցնում է բազային դասի բոլոր foo տարբերակները։ Սա նշանակում է, որ երբ B-ից կանչում եք foo, կոմպիլյատորը որոնում է միայն B-ում և չի դիտարկում A-ի տարբերակները։
+
+// Name hiding (անունների թաքցում)՝ դա C++-ի վարքագիծ է, որը տեղի է ունենում, երբ ածանցյալ դասում հայտարարվում է բազային դասի նույն անունով անդամ (մեթոդ կամ փոփոխական), որը թաքցնում է բազային դասի բոլոր նույն անունով տարբերակները։
+// Ինչու է այսպես աշխատում
+// C++-ի նախագծման այս որոշումը թույլ է տալիս ծրագրավորողին վերահսկել, թե ինչ ֆունկցիաներ և անդամներ պետք է հասանելի լինեն ածանցյալ դասի օբյեկտների համար: Դա ապահովում է ավելի հստակ և կանխատեսելի վարվելակերպ, երբ բազային և ածանցյալ դասերում կան միանման անուններով ֆունկցիաներ:
+
+// Եթե ածանցյալ դասում հայտնաբերվում է նույն անունով ֆունկցիա, բազային դասի բոլոր նույն անունով ֆունկցիաները (անկախ ստորագրություններից) թաքցվում են։
+// Սա նշանակում է, որ ածանցյալ դասից փորձելով կանչել բազային դասի ֆունկցիան՝ կստանաք սխալ։
+
+// Թեև B::foo()-ն չունի պարամետրեր, այն միևնույն է թաքցնում է A::foo(int) և A::foo(std::string) բոլոր տարբերակները։
 
 
 
-// class A
-// {
-//     int x;
-// public:
-//     virtual void foo(std::string str){std::cout << str << std::endl;}
-// };
+// Name hiding-ի պատճառները
+// Ածանցյալ դասի առաջնահերթությունը
+// Եթե ծրագրավորողը ածանցյալ դասում սահմանում է նույն անունով ֆունկցիա, ենթադրվում է, որ նա ուզում է ստվերել բազային դասի տարբերակները։
 
-// class B : public A
-// {
-//     int z;
-// public:
-//     virtual void foo() {std::cout << "pahooo" << std::endl;}
-// };
+// Անորոշության կանխում
+// Եթե ածանցյալ դասի foo()-ն չթաքցներ բազային դասի foo-ի բոլոր տարբերակները, կոմպիլյատորը հաճախ կբախվեր ֆունկցիայի ընտրության անորոշության (ambiguity) խնդրին։
 
-// int main()
-// {
-//     B obj;
-
-//     A* o = &obj;
-
-//     // obj.foo();//okeya
-//     o->foo("hmmmmm");//esi sxala vortev B classum mana gali std::string parametrov foo funkcia,chi gtnum u sxala tali,vochte ete nayuma tenuma B um chka gnum A-i mej mana gali gtnum
-// }
+// Հստակություն Name hiding-ի կանոնը ստիպում է ծրագրավորողին հստակ նշել, թե որ ֆունկցիան է պետք օգտագործել՝ բազայինի թե ածանցյալի։
+/////////////////////////////////////////////////////////////////
