@@ -10,7 +10,7 @@ public:
 	student(int r):roll(r) {} 
 
 	// A const function that changes roll with the help of const_cast 
-	void fun() const
+	void fun() const//bocy ena vor unenq es verjum const grac aysinqn this-i membernery chenq karab poxenq ,bayc pastaci const_cast-i mijocov poxum enq
 	{ 
 		( const_cast <student*> (this) )->roll = 5; 
 	} 
@@ -29,3 +29,7 @@ int main(void)
 
 	return 0; 
 } 
+// const_cast can be used to change non-const class members inside a const member function. 
+// Consider the following code snippet. 
+// Inside const member function fun(), ‘this’ is treated by the compiler as ‘const student* const this’, i.e. ‘this’ is a constant pointer to a constant object,
+// thus compiler doesn’t allow to change the data members through ‘this’ pointer. const_cast changes the type of ‘this’ pointer to ‘student* const this’.
