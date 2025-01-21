@@ -1,5 +1,6 @@
 #include <iostream>
 
+So to use static_cast in case of inheritance, the base class must be accessible, non virtual and unambiguous.
 // int main()
 // {
 //     char ch = '0';
