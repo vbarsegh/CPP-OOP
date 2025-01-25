@@ -14,7 +14,7 @@ ${NAME}: ${OBJS}
 	${CC} ${FLAGS} ${OBJS} -o ${NAME}
 
 %.o:%.cpp Makefile Array.hpp
-	${CC} ${FLAGS} -c  $< -o $@
+	${CC} ${FLAGS} -c  $< -o $@  -I.
 
 clean:
 	rm -f ${OBJS}

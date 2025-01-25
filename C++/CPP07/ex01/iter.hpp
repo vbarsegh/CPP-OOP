@@ -14,7 +14,23 @@ void    iter(const T* arr, size_t len, void (*func)(const T&))
 }
 
 template <typename T>
+void    iter(T* arr, size_t len, void (*func)(T&))
+{
+	if (!arr)
+		return ;
+	for (size_t i = 0; i < len; i++)
+		func(arr[i]);
+	std::cout << "Type of T " << typeid(T).name() << std::endl;
+}
+
+template <typename T>
 void	func(const T& argument)
+{
+	std::cout << "current argument is " << argument << std::endl;
+}
+
+template <typename T>
+void	func(T& argument)
 {
 	std::cout << "current argument is " << argument << std::endl;
 }
