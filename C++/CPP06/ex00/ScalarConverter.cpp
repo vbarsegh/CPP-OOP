@@ -32,33 +32,39 @@ void ScalarConverter::convert(const std::string& literal)
 	switch(check_type(literal))
 	{
 		case 0:
-		///
-			std::cout << "x равно 0" << std::endl;
 			convert_char(literal);
 			break ;
 		case 1:
-			///
-			 std::cout << "x равно 1" << std::endl;
 			convert_int(literal);
 			break ;
 		case 2:
-			///
-			 std::cout << "x равно 2" << std::endl;
 			convert_float(const_cast<std::string&>(literal));
 			break ;
 		case 3:
-			//
-			std::cout << "x равно 3" << std::endl;
 			convert_double(literal);
 			break ;
 		default:
 		if (literal == "-inff" || literal == "-inf"
+			|| literal == "+inff" || literal == "+inf"
 			|| literal == "inff" || literal == "inf")
 		{
 			cout << "char: " << "impossible" << endl;
 			cout << "int: " << "impossible" << endl;
-			cout << "float: " << "inff" << endl;
-			cout << "double: " << "inf" << endl;
+			if (literal[0] == '+')
+			{
+				cout << "float: " << "+inff" << endl;
+				cout << "double: " << "+inf" << endl;
+			}
+			else if (literal[0] == '-')
+			{
+				cout << "float: " << "-inff" << endl;
+				cout << "double: " << "-inf" << endl;
+			}
+			else
+			{
+				cout << "float: " << "inff" << endl;
+				cout << "double: " << "inf" << endl;
+			}
 		}
 		else if (literal == "nanf" || literal == "nan")
 		{
@@ -79,41 +85,14 @@ void ScalarConverter::convert(const std::string& literal)
 
 int check_type(const std::string& literal)
 {
-	cout << "li = " <<literal<<endl;
-	cout << "li = " <<literal.size()<<endl;
-
  	if (literal.size() == 1 && !isdigit(literal[0]))
 		return (0);//char
 	if (allElemsIsDigit(literal) > 0)
-	{
-		cout << "paho";
 		return (1);//int
-	}
 	if (isFloat(literal) > 0)
-	{
-		cout << "ekav\n";
 		return (2);//float
-	}
 	if (isDouble(literal) > 0)
 		return (3);
-	cout << "mmmmmmm" <<endl;
-	// if (literal == "nanf" || literal == "nan")
-	// if (literal == "-inff" || literal == "-inf"
-	// 	|| literal == "inff" || literal == "inf")
-	// {
-	// 	cout << "char: " << "impossible" << endl;
-	// 	cout << "int: " << "impossible" << endl;
-	// 	cout << "float: " << "inff" << endl;
-	// 	cout << "double: " << "inf" << endl;
-	// }
-	// else if (literal == "-nanf" || literal == "-nan"
-	// 	|| literal == "nanf" || literal == "nan")
-	// {
-	// 	cout << "char: " << "impossible" << endl;
-	// 	cout << "int: " << "impossible" << endl;
-	// 	cout << "float: " << "nanf" << endl;
-	// 	cout << "double: " << "nan" << endl;
-	// }
 	return (777);
 }
 ///////////////////////
@@ -126,10 +105,7 @@ int allElemsIsDigit(const std::string& literal)
 		if ((i == 0) && (literal[i] == '+' || literal[i] == '-'))
 			continue ;
 		if (literal[i] < '0' || literal[i] > '9')
-		{
-			cout << "yhn";
 			return (-1);
-		}
 	}
 	return (1);
 }
@@ -159,7 +135,6 @@ int contain_only_these_simbols(const std::string& literal, const char* sim)
 			continue;
 		return (-1);
 	}
-	cout << "beeeeeee\n";
 	return (1);
 }
 
@@ -187,8 +162,6 @@ int count_of_char(const std::string& literal, char c)
 		return (count);
 	return (count);
 }
-
-
 //////////////////////////////
 
 ////////////
@@ -199,20 +172,7 @@ int isDouble(const std::string& literal)
 		return (-1);
 	return (1);
 }
-
-// int contain_digit_dot(const std::string& literal)
-// {
-// 	for (size_t i = 0; i < literal.size(); i++)
-// 	{
-// 		if ((literal[i] >= '0' && literal[i] <= '9')
-// 			|| literal[i] == '.')
-// 			continue;
-// 		return (-1);
-// 	}
-// 	return (1);
-// }
-
-//////////
+/////////
 
 
 
@@ -220,16 +180,13 @@ int isDouble(const std::string& literal)
 void	convert_char(const std::string& literal)
 {
 	char c = literal[0];
-	cout << "c = " << c<<endl;
 	if(!isascii(c))
 		cout << "char: impossible" << endl;
 	else if(!isprint(c))
 		cout << "char: none displayable" << endl;
 	else
 		cout << "char: " << literal << endl;
-	// if (liter)
 	cout << "int: " << static_cast<int>(c) << endl;
-	// if ()
 	cout << "float: " << static_cast<float>(c) << ".0f" << endl;
 	cout << "double: " << static_cast<double>(c) << ".0" << endl;
 }
@@ -239,9 +196,6 @@ void	convert_int(const std::string& literal)
 	std::stringstream ss(literal);
 	long long num;
 	ss >> num;
-	if (ss.fail()) 
-    	std::cout << "Error: Invalid number format" << std::endl;
-	cout << "num="<<num<<endl;
 	if (num > 127 || num < 0)
 		cout << "char: impossible" << endl;
 	else if (isprint(num))
@@ -259,22 +213,14 @@ void	convert_int(const std::string& literal)
 void	convert_float(std::string& literal)
 {
 	literal.resize(literal.size() - 1);
-	cout << literal.size()<<endl;
 	std::stringstream ss(literal);
 	float f;
 	ss >> f;
-	if (ss.fail())
-	{
-    	std::cout << "Error: Invalid number format" << std::endl;
-		// return ();
-	}
+
 	int all_zeros = 1;
-	cout << "f = " << f << endl;
+	// if (ss.fail())
+	// 	cout << "yjn\n";
 	unsigned int ind = literal.find('.');
-	cout << "s = " <<literal.size() << endl;
-	cout << "s = " << ind << endl;
-	// if (ind == UINT_MAX)
-	// 	ind = INT_MAX - 1;
 	ind++;
 	while (ind < literal.size())
 	{
@@ -286,12 +232,18 @@ void	convert_float(std::string& literal)
 			break ;
 		}
 	}
-	if (all_zeros == 0)
+	////////
+	// int num = static_cast<int>(f);
+	// std::stringstream ss1;
+	// ss1 << num;
+	// std::string str1 = ss1.str();
+
+	///////
+	if (all_zeros == 0)// && !contain_only_these_simbols(str1, ""))
 		cout << "char: impossible" << endl;
 	else
 	{
 		int num = static_cast<int>(f);
-		cout << "num = " << num << endl;
 		if (num > 127 || num < 0)
 		cout << "char: impossible" << endl;
 		else if (isprint(num))
@@ -307,12 +259,12 @@ void	convert_float(std::string& literal)
 	if (all_zeros == 1)
 	{
 		cout << "float: " << std::fixed << std::setprecision(1)<< f << "f" << endl;
-		std::cout << "doubleeee: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
+		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
 	}
 	else
 	{
 		cout << "float: " << f << "f" << endl;
-		cout << "doublee: " << static_cast<double>(f) << endl;
+		cout << "double: " << static_cast<double>(f) << endl;
 	}
 }
 
@@ -322,11 +274,6 @@ void	convert_double(const std::string& literal)
 	double d;
 
 	ss >> d;
-	if (ss.fail())
-	{
-    	std::cout << "Error: Invalid number format" << std::endl;
-		// return ();
-	}
 	int all_zeros = 1;
 	unsigned int ind = literal.find('.');
 	ind++;
@@ -345,7 +292,6 @@ void	convert_double(const std::string& literal)
 	else
 	{
 		int num = static_cast<int>(d);
-		cout << "num = " << num << endl;
 		if (num > 127 || num < 0)
 		cout << "char: impossible" << endl;
 		else if (isprint(num))
@@ -353,7 +299,6 @@ void	convert_double(const std::string& literal)
 		else
 			cout << "char: Non displayable" << endl;
 	}
-	cout << "xi = " << static_cast<long long>(d) << endl;
 	if (static_cast<long long>(d) < -2147483648 || static_cast<long long>(d) > 2147483647)
 		cout << "int: impossible" << endl;
 	else
@@ -361,7 +306,7 @@ void	convert_double(const std::string& literal)
 	if (all_zeros == 1)
 	{
 		cout << "float: " << static_cast<double>(d) << ".0f" << std::endl;
-		cout << "doublee: " << d << ".0" << endl;
+		cout << "double: " << d << ".0" << endl;
 	}
 	else
 	{
