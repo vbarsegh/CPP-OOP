@@ -18,7 +18,7 @@ int main()
 	iter(char_arr, carr_len, func<char>);
 
 	//array of strings
-	const std::string string_arr[] = {"Arina", "Vrds", "Vahags", "brats" ,"heriqa lav"};
+	const std::string string_arr[] = {"hres", "Vrds", "Vahags", "brats" ,"heriqa lav"};
 	size_t sarr_len = sizeof(string_arr) / sizeof(string_arr[0]);
 	iter(string_arr, sarr_len, func<std::string>);
 
@@ -59,3 +59,5 @@ int main()
 
 //   return 0;
 // }
+
+

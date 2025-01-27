@@ -20,10 +20,6 @@ public:
 	/////////
 	T& operator[](const unsigned int index);
 	unsigned int size() const;
-	struct IndexOutOfRange : public std::exception
-	{
-		const char* what() const throw();
-	};
 };
 
 #include "Array.tpp"

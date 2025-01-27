@@ -258,6 +258,12 @@ int main()
 	std::cout << std::endl;
 	std::cout << "\033[35m***********************************************\033[0m" << std::endl;
 	std::cout << std::endl;
-
+    return (0);
 
 }
+
+// int main()
+// {
+//     main_a();
+//     system("leaks TemplateClass");
+// }
