@@ -9,6 +9,43 @@ Span::Span(unsigned int N) : _max_num_of_container(N), _current_elem_ind(0)
 {
     cout << "ctor with param is called" << endl;
 }
+// Span::Span(const Span& other)
+// {
+//     cout << "Copy ctor is called" << endl;
+//     _vec = other._vec;
+//     _max_num_of_container = other._max_num_of_container;
+//     _current_elem_ind = other._current_elem_ind;
+// }
+//`````Что здесь происходит?
+// 1)Сначала вызывается конструктор по умолчанию для _vec (std::vector<int>), который создает пустой вектор.
+// Затем выполняется оператор присваивания _vec = other._vec;, который копирует все элементы other._vec в _vec.
+// В итоге у нас два вызова конструктора:
+// Конструктор по умолчанию (создает пустой std::vector<int>).
+// Оператор присваивания, который копирует данные из other._vec.
+// ✅ Если использовать initializer list, этого лишнего копирования не будет.
+//2)Возможность исключений и неопределенного состояния
+// Что может пойти не так?
+// Если при копировании _vec = other._vec; произойдет исключение (например, нехватка памяти), то объект Span будет частично создан.
+// Поля _max_num_of_container и _current_elem_ind могут оказаться неинициализированными или в некорректном состоянии.
+// Если конструктор завершился с исключением, то деструктор может не вызваться, что может привести к утечке памяти.
+// ✅ При использовании initializer list исключение выбрасывается раньше, до создания объекта, и объект вообще не создается.
+
+Span::Span(const Span& other) : _vec(other._vec), _max_num_of_container(other._max_num_of_container), _current_elem_ind(other._current_elem_ind)
+{
+    cout << "Copy ctor is called" << endl;
+}
+
+Span& Span::operator=(const Span& other)
+{
+    cout << "Copy assignment is called" << endl;
+    if (this != &other)
+    {
+        _vec = other._vec; 
+        _max_num_of_container = other._max_num_of_container;
+        _current_elem_ind = other._current_elem_ind;
+    }
+    return (*this);
+}
 
 Span::~Span()
 {

@@ -14,8 +14,8 @@ private:
 public:
     Span();
     Span(const unsigned int N);
-    // Span(const Span& other);
-    // Span& operator=(const Span& other);
+    Span(const Span& other);
+    Span& operator=(const Span& other);
     ~Span();
     void    addNumber(int);
     int get_vec_num(int i){return _vec[i];}
