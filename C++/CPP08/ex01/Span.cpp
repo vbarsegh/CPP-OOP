@@ -24,7 +24,7 @@ void    Span::addNumber(int num)
     _current_elem_ind++;
 }
 
-long long Span::shortestSpan()
+unsigned int Span::shortestSpan()
 {
     if (_current_elem_ind <= 1)
         throw CanNotFindshortestSpan();
@@ -38,18 +38,14 @@ long long Span::shortestSpan()
     return (shortestspan);
 }
 
-long long Span::longestSpan()
+unsigned int Span::longestSpan()
 {
     if (_current_elem_ind <= 1)
         throw CanNotFindlongestSpan();
     std::sort(_vec.begin(), _vec.end());
-    long long longestspan = _vec[_vec.size() - 1] - _vec[0];
-    // for (size_t i = 2; i < _vec.size(); i++)
-    // {
-    //     if ((_vec[i] - _vec[i - 1]) > longestspan)
-    //         longestspan = _vec[i] - _vec[i - 1];
-    // }
-    return (longestspan);
+    // for(size_t i = 0; i < _vec.size(); i++)
+    //     cout << " " << _vec.at(i) << " ";
+    return (_vec[_vec.size() - 1] - _vec[0]);
 }
 
 const char* Span::VectorAlreadyFull::what() const throw()
