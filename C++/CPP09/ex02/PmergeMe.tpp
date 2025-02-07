@@ -28,6 +28,27 @@ PmergeMe<Container>::~PmergeMe()
 {
     cout << "PmergeMe dtor is called" << endl;
 }
+template <typename Container>
+size_t PmergeMe<Container>::len(std::string str, char c)
+{
+    size_t count = 0;
+  for (size_t i = 0; i < str.length(); i++) {
+        if (str[i] == c)
+            count++;
+    }
+    return (count);
+}
+
+template <typename Container>
+char* PmergeMe<Container>::trim(char* str) {
+    while (*str == ' ') str++; // Убираем пробелы в начале
+
+    char* end = str + std::strlen(str) - 1;
+    while (end > str && *end == ' ') end--; // Убираем пробелы в конце
+
+    *(end + 1) = '\0'; // Завершаем строку
+    return str;
+}
 
 template <typename Container>
 void    PmergeMe<Container>::fill_container(char** argv)
@@ -35,14 +56,25 @@ void    PmergeMe<Container>::fill_container(char** argv)
     for(size_t i = 1; argv[i]; ++i)
     {
         std::stringstream ss(argv[i]);
-
+        std::string str = ss.str();
+            cout << "str= " << str<<endl;
         long long elem;
-        if (ss.str().find_first_not_of("0123456789") != std::string::npos || ss.str().size() > 10)
+        if (str.find_first_not_of(" +0123456789") != std::string::npos || str.size() > 10)
 			throw std::runtime_error("Invaliiiid unput");
-		ss >> elem;
-		if (elem > INT_MAX)
-			throw std::runtime_error("Invalieeed unput");
-		ctr.push_back(elem);
+        size_t z = std::count(str.begin(), str.end(), '+');
+        cout << "z = " <<z << endl;
+        str = trim(argv[i]);
+        cout << "trim str->" << str << endl;
+        if (str.find('+') == std::string::npos
+            || (str.find('+') == 0 && str.find('+') != std::string::npos && len(str, '+') == 1 && str.find(' ') == std::string::npos))
+        {
+            ss >> elem;
+            if (elem > INT_MAX)
+                throw std::runtime_error("elem higher than INT_MAX");
+            ctr.push_back(elem);
+        }
+		else
+            throw std::runtime_error("+ in invalid position or + is not 1");
     }
 }
 
@@ -56,25 +88,28 @@ void	PmergeMe<Container>::print()
 template <typename Container>
 Container binary_search(Container big, Container small)
 {
+    size_t i = 1;//2^0
     while (!small.empty())
     {
+        cout << "i = "<<i<<endl;
+        if (i >= small.size())
+            i *= 0;
         typename Container::iterator middle;
 		typename Container::iterator left = big.begin();
         typename Container::iterator right = big.end() - 1;
-        // int i = 1;//2^0
 		while (left < right)
         {
-            // if (i > small.size())
-            //     i = 0;
 			middle = left + std::distance(left, right) / 2;
-            if (small[0] <= *middle)
+            if (small[i] <= *middle)
                 right = middle;
 			else
                 left = middle + 1;
         }
-		big.insert(left, small[0]);
-        small.erase(small.begin());
+		big.insert(left, small[i]);
+        small.erase(small.begin() + i);
+        i *= 2;
     }
+    cout << endl;
     return big;
 }
 
@@ -100,7 +135,6 @@ Container rec(Container curr)
 			small.push_back(curr[i]);
 		}
 	}
-
 	return binary_search(rec(big), small);
 }
 

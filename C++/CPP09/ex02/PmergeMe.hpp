@@ -19,6 +19,8 @@ public:
     ~PmergeMe();
     void    fill_container(char** argv);
     void    print();
+    size_t len(std::string str, char c);
+    char* trim(char* str);
     void    sort();
 };
 
