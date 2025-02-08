@@ -3,13 +3,13 @@
 template <typename Container>
 PmergeMe<Container>::PmergeMe()
 {
-    cout << "PmergeMe default ctor is called" << endl;
+    // cout << "PmergeMe default ctor is called" << endl;
 }
 
 template <typename Container>
 PmergeMe<Container>::PmergeMe(const PmergeMe<Container>& other) : ctr(other.ctr)
 {
-    cout << "PmergeMe copy ctor is called" << endl;
+    // cout << "PmergeMe copy ctor is called" << endl;
 }
 
 template <typename Container>
@@ -17,7 +17,7 @@ PmergeMe<Container>& PmergeMe<Container>::operator=(const PmergeMe<Container>& o
 {
     if (this != &other)
     {
-        cout << "PmergeMe operator= is called" << endl;
+        // cout << "PmergeMe operator= is called" << endl;
         ctr = other.ctr;
     }
     return (*this);
@@ -26,7 +26,7 @@ PmergeMe<Container>& PmergeMe<Container>::operator=(const PmergeMe<Container>& o
 template <typename Container>
 PmergeMe<Container>::~PmergeMe()
 {
-    cout << "PmergeMe dtor is called" << endl;
+    // cout << "PmergeMe dtor is called" << endl;
 }
 template <typename Container>
 size_t PmergeMe<Container>::len(std::string str, char c)
@@ -57,14 +57,14 @@ void    PmergeMe<Container>::fill_container(char** argv)
     {
         std::stringstream ss(argv[i]);
         std::string str = ss.str();
-            cout << "str= " << str<<endl;
+            // cout << "str= " << str<<endl;
         long long elem;
         if (str.find_first_not_of(" +0123456789") != std::string::npos || str.size() > 10)
 			throw std::runtime_error("Invaliiiid unput");
-        size_t z = std::count(str.begin(), str.end(), '+');
-        cout << "z = " <<z << endl;
+        // size_t z = std::count(str.begin(), str.end(), '+');
+        // cout << "z = " <<z << endl;
         str = trim(argv[i]);
-        cout << "trim str->" << str << endl;
+        // cout << "trim str->" << str << endl;
         if (str.find('+') == std::string::npos
             || (str.find('+') == 0 && str.find('+') != std::string::npos && len(str, '+') == 1 && str.find(' ') == std::string::npos))
         {
@@ -82,7 +82,8 @@ template <typename Container>
 void	PmergeMe<Container>::print()
 {
 	for(size_t i = 0; i < ctr.size(); ++i)
-		cout << ctr[i] << endl;
+		cout << ctr[i] << " ";
+    cout << endl;
 }
 
 template <typename Container>
@@ -91,7 +92,6 @@ Container binary_search(Container big, Container small)
     size_t i = 1;//2^0
     while (!small.empty())
     {
-        cout << "i = "<<i<<endl;
         if (i >= small.size())
             i *= 0;
         typename Container::iterator middle;
@@ -109,7 +109,6 @@ Container binary_search(Container big, Container small)
         small.erase(small.begin() + i);
         i *= 2;
     }
-    cout << endl;
     return big;
 }
 
@@ -142,4 +141,19 @@ template <typename Container>
 void PmergeMe<Container>::sort()
 {
 	ctr = rec(ctr);
+}
+
+template <typename Container>
+size_t  PmergeMe<Container>::get_ctr_size()
+{
+    return (ctr.size());
+}
+
+template <typename Container>
+double PmergeMe<Container>::calculate_time()
+{
+    clock_t start_vec = clock();
+    sort();
+    clock_t end_vec = clock(); 
+    return ((double)(end_vec - start_vec) / CLOCKS_PER_SEC * 10);
 }

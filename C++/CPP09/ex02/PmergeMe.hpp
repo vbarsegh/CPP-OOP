@@ -5,6 +5,7 @@
 #include <deque>
 #include <limits>
 #include <sstream>
+#include <ctime>
 using std::cout;
 using std::endl;
 
@@ -22,6 +23,8 @@ public:
     size_t len(std::string str, char c);
     char* trim(char* str);
     void    sort();
+    size_t  get_ctr_size();
+    double calculate_time();   
 };
 
 #include "PmergeMe.tpp"
