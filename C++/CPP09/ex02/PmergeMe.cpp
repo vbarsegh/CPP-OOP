@@ -1,35 +1,36 @@
 #include "PmergeMe.hpp"
 
-template <typename Container>
-PmergeMe<Container>::PmergeMe()
+
+PmergeMe::PmergeMe()
 {
     // cout << "PmergeMe default ctor is called" << endl;
 }
 
-template <typename Container>
-PmergeMe<Container>::PmergeMe(const PmergeMe<Container>& other) : ctr(other.ctr)
+
+PmergeMe::PmergeMe(const PmergeMe& other) : deq(other.deq), vec(other.vec)
 {
     // cout << "PmergeMe copy ctor is called" << endl;
 }
 
-template <typename Container>
-PmergeMe<Container>& PmergeMe<Container>::operator=(const PmergeMe<Container>& other)
+
+PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 {
     if (this != &other)
     {
         // cout << "PmergeMe operator= is called" << endl;
-        ctr = other.ctr;
+        vec = other.vec;
+        deq = other.deq;
     }
     return (*this);
 }
 
-template <typename Container>
-PmergeMe<Container>::~PmergeMe()
+
+PmergeMe::~PmergeMe()
 {
     // cout << "PmergeMe dtor is called" << endl;
 }
-template <typename Container>
-size_t PmergeMe<Container>::len(std::string str, char c)
+
+size_t PmergeMe::len(std::string str, char c)
 {
     size_t count = 0;
   for (size_t i = 0; i < str.length(); i++) {
@@ -39,8 +40,8 @@ size_t PmergeMe<Container>::len(std::string str, char c)
     return (count);
 }
 
-template <typename Container>
-char* PmergeMe<Container>::trim(char* str) {
+
+char* PmergeMe::trim(char* str) {
     while (*str == ' ') str++; // Убираем пробелы в начале
 
     char* end = str + std::strlen(str) - 1;
@@ -51,20 +52,16 @@ char* PmergeMe<Container>::trim(char* str) {
 }
 
 template <typename Container>
-void    PmergeMe<Container>::fill_container(char** argv)
+void    PmergeMe::fill_container(char** argv, Container& ctr)
 {
     for(size_t i = 1; argv[i]; ++i)
     {
         std::stringstream ss(argv[i]);
         std::string str = ss.str();
-            // cout << "str= " << str<<endl;
         long long elem;
         if (str.find_first_not_of(" +0123456789") != std::string::npos || str.size() > 10)
 			throw std::runtime_error("Invaliiiid unput");
-        // size_t z = std::count(str.begin(), str.end(), '+');
-        // cout << "z = " <<z << endl;
         str = trim(argv[i]);
-        // cout << "trim str->" << str << endl;
         if (str.find('+') == std::string::npos
             || (str.find('+') == 0 && str.find('+') != std::string::npos && len(str, '+') == 1 && str.find(' ') == std::string::npos))
         {
@@ -78,13 +75,14 @@ void    PmergeMe<Container>::fill_container(char** argv)
     }
 }
 
-template <typename Container>
-void	PmergeMe<Container>::print()
+
+void	PmergeMe::print()
 {
-	for(size_t i = 0; i < ctr.size(); ++i)
-		cout << ctr[i] << " ";
+	for(size_t i = 0; i < vec.size(); ++i)
+		cout << vec[i] << " ";
     cout << endl;
 }
+
 
 template <typename Container>
 Container binary_search(Container big, Container small)
@@ -137,23 +135,39 @@ Container rec(Container curr)
 	return binary_search(rec(big), small);
 }
 
-template <typename Container>
-void PmergeMe<Container>::sort()
+
+void PmergeMe::sort(char** argv)
 {
-	ctr = rec(ctr);
+        fill_container(argv, deq);
+        fill_container(argv, vec);
+        cout << "Before:  " ;
+        print();
+        // double time_vec = vec.calculate_time();
+        clock_t start_vec = clock();
+        vec = rec(vec);
+        clock_t end_vec = clock(); 
+        // double time_deq = deq.calculate_time();
+        clock_t start_deq = clock();
+        deq = rec(deq);
+        clock_t end_deq = clock(); 
+        
+        cout << "After:   ";
+        print();
+        cout << "Time to process a range of "<< get_ctr_size(vec) <<  " elements with std::vector : " << (double)(end_vec - start_vec) / CLOCKS_PER_SEC * 10 << " us" << endl;
+        cout << "Time to process a range of "<< get_ctr_size(deq) <<  " elements with std::deque  : " << (double)(end_deq - start_deq) / CLOCKS_PER_SEC * 10 << " us" << endl;
 }
 
 template <typename Container>
-size_t  PmergeMe<Container>::get_ctr_size()
+size_t  PmergeMe::get_ctr_size(Container ctr)
 {
     return (ctr.size());
 }
 
-template <typename Container>
-double PmergeMe<Container>::calculate_time()
-{
-    clock_t start_vec = clock();
-    sort();
-    clock_t end_vec = clock(); 
-    return ((double)(end_vec - start_vec) / CLOCKS_PER_SEC * 10);
-}
+
+// double PmergeMe::calculate_time()
+// {
+//     clock_t start_vec = clock();
+//     sort();
+//     clock_t end_vec = clock(); 
+//     return ((double)(end_vec - start_vec) / CLOCKS_PER_SEC * 10);
+// }

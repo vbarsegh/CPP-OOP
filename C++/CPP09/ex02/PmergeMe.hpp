@@ -9,22 +9,22 @@
 using std::cout;
 using std::endl;
 
-template <typename Container>
 class PmergeMe{
 private:
-    Container ctr;
+    std::deque<int> deq;
+    std::vector<int> vec;
 public:
     PmergeMe();
     PmergeMe(const PmergeMe& other);
     PmergeMe& operator=(const PmergeMe& other);
     ~PmergeMe();
-    void    fill_container(char** argv);
+    template <typename Container>
+    void    fill_container(char** argv, Container& ctr);
     void    print();
     size_t len(std::string str, char c);
     char* trim(char* str);
-    void    sort();
-    size_t  get_ctr_size();
-    double calculate_time();   
+    void    sort(char** argv);
+    template <typename Container>
+    size_t  get_ctr_size(Container ctr);
+    // double calculate_time();   
 };
-
-#include "PmergeMe.tpp"

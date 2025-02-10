@@ -1,10 +1,10 @@
-NAME = PmergeMe
+NAME = RPN
 
 CC = c++
 
 FLAGS = -g3 -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp PmergeMe.cpp
+SRC = main.cpp RPN.cpp
 
 OBJS = ${SRC:.cpp=.o}
 
@@ -13,7 +13,7 @@ all: ${NAME}
 ${NAME}: ${OBJS}
 	${CC} ${FLAGS} ${OBJS} -o ${NAME}
 
-%.o:%.cpp Makefile PmergeMe.hpp
+%.o:%.cpp Makefile RPN.hpp
 	${CC} ${FLAGS} -c  $< -o $@  -I.
 
 clean:
