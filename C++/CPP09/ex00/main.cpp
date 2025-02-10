@@ -12,12 +12,12 @@ int main(int argc, char **argv)
     }
     try{
         BitcoinExchange obj;
-        // while ()
+        BitcoinExchange ob;
+        ob = obj;
         obj.simulation(argv[1]);
     }
     catch(std::exception &e)
     {
         cout << "Exception: " << e.what() << endl;
     }
-    // file.close();
 }

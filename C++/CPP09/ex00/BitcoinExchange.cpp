@@ -2,9 +2,35 @@
 
 BitcoinExchange::BitcoinExchange() : file_name("data.csv")
 {
-    cout << "BitcoinExchange default ctor is called" << endl;
+    // cout << "BitcoinExchange default ctor is called" << endl;
 	fill_map();
 }
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : file_name(other.file_name), _map(other._map)
+{
+    cout << "BitcoinExchange copy ctor is called" << endl;
+	// std::ifstream нельзя копировать.
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
+{
+	if (this != &other)
+	{
+		cout << "BitcoinExchange operator= is called" << endl;
+		file_name = other.file_name;
+		_map = other._map;
+		// Если файл уже был открыт, закрываем его
+        if (file.is_open())
+            file.close();
+		// Открываем файл заново (при необходимости)
+        file.open(file_name.c_str()); 
+        if (!file.is_open()) {
+            throw std::runtime_error("Cannot open file in operator=");
+        }
+	}
+	return (*this);
+}
+
 
 void	BitcoinExchange::fill_map()
 {
@@ -15,31 +41,23 @@ void	BitcoinExchange::fill_map()
 	std::string line;
 	std::string key;
     std::string val;
-	int count = 0;
 	double value;
 	std::stringstream ss;
+	getline(file, line);
 	while (getline(file, line))
 	{
-		if (count == 0)
-		{
-			count++;
-			continue ;
-		}
 		int ind = line.find(',');
 		key = line.substr(0, ind);
 		val = line.substr(ind + 1, line.size());
-		// cout << "vaaaaaal = " << val;
-		// cout << "size = " << line.size()<< endl;
 		ss << val;
 		ss >> value;
-		// cout << "key = " << key << "  " << "value = " << value << endl;
 		_map.insert(std::make_pair<std::string, double>(key, value));
 		ss.clear();
 	}
-	for (std::map<std::string, double>::iterator it = _map.begin(); it != _map.end(); ++it) {
-        // it->first — это ключ, it->second — это значение
-        std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
-	}
+	// for (std::map<std::string, double>::iterator it = _map.begin(); it != _map.end(); ++it) {
+    //     // it->first — это ключ, it->second — это значение
+    //     std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+	// }
 }
 
 void	BitcoinExchange::simulation(char *argv1)
@@ -51,16 +69,12 @@ void	BitcoinExchange::simulation(char *argv1)
 	std::string line;
     std::string key;
     std::string value;
-	int count = 0;
+	getline(file, line);
+	if (line != "date | value")
+		throw std::runtime_error("Wrong first line in input.txt");
     while (getline(file, line))
     {
 		try{
-			if (count == 0)
-			{
-				++count;
-				continue ;
-			}
-			// cout << "line = " << line << endl;
 			split_line(line, key, value);
 		}
 		catch(std::exception& e)
@@ -73,92 +87,54 @@ void	BitcoinExchange::simulation(char *argv1)
 
 void BitcoinExchange::split_line(std::string& line, std::string& key, std::string& value) {
     size_t delimiter_pos = line.find('|'); // Ищем разделитель " | "
-    
     if (delimiter_pos != std::string::npos && len(line, '|') == 1) {// Если найдено
-		line = trim(line);//demi u verji white spascery hanaca
-        key = line.substr(0, delimiter_pos);  // Левая часть — дата
+		key = line.substr(0, delimiter_pos);  // Левая часть — дата
         value = line.substr(delimiter_pos + 1);
 		try{
 			key = trim(key);
 			validate_key(key);
-
 			value = trim(value);
 			double val = validate_value(value);
-			// cout << "mmm-->" << key << endl;
 			search_key_in_map(key, val);
 		}
 		catch(std::exception& e)
 		{
 			cout << "Exception: " << e.what() << endl;
 		}
-    } else { 
-       throw std::runtime_error("Invalid pipe");
     }
+	else
+       throw std::runtime_error("Invalid pipe");
 }
 
 int BitcoinExchange::check_have_this_key_in_map(const std::string& cur_key)
 {
-	// cout << "vates->" << cur_key << endl;
 	for (std::map<std::string, double>::iterator it = _map.begin(); it != _map.end(); ++it){
 		if (it->first == cur_key)
-		{
-			// cout << "hres->" << it->first << endl;
-			// cout << "hres->" << cur_key << endl;
-
 			return (1);
-		}
 	}
 	return (-1);
 }
 
 void	BitcoinExchange::search_key_in_map(std::string& key, double value)
 {
-	// cout << "bbeeeeee\n";
 	std::map<std::string, double>::iterator it;
-	// std::map<std::string, double>::iterator it_helper2 = _map.begin();
 	if (key < "2009-01-02")
+		throw std::runtime_error("2009-01-02 ic hin amsativ!!");
+	if (check_have_this_key_in_map(key) == 1)
+		it = _map.lower_bound(key);
+	else
 	{
-		cout << "sranic hin data chka brats" << endl;
-		return ;
+		it = _map.lower_bound(key);
+		it--;
 	}
-	// for (std::map<std::string, double>::iterator it = _map.begin(); it != _map.end(); ++it){
-		// it = _map.lower_bound(key);
-		// it = _map.lower_bound(key);
-		cout << "eeee->" << value << endl;
-		if (check_have_this_key_in_map(key) == 1)
-		{
-			// cout << "zibil\n";
-			it = _map.lower_bound(key);
-			// cout << key << " | " << value << " = " << it->second * value << endl;
-			// continue ;
-		}
-		else
-		{
-			it = _map.lower_bound(key);
-			if (it == _map.end())//Если key больше всех ключей
-			{
-				it--;
-				// cout << "ooooooooooooooooooooo\n";
-				// cout << key << " | " << value << " = " << it->second * value << endl;
-			}
-			else
-			{
-				it--;
-				// it--;
-				// cout << "vaxxxx\n";
-
-				// it--;
-			}
-		}
-			cout << key << " | " << value << " = " << it->second * value << endl;
-	// }
+		cout << key << " | " << value << " = " << it->second * value << endl;
 }
 
 
 //////////////////////validate_value////////////////////////
 double    BitcoinExchange::validate_value(std::string& value)
 {
-	if (value.find_first_not_of("0123456789") != std::string::npos)
+	if (value.find_first_not_of(".0123456789") != std::string::npos)
 		throw std::runtime_error("Invalid value");
 	double	val;
 	std::stringstream ss;
@@ -177,24 +153,13 @@ double    BitcoinExchange::validate_value(std::string& value)
 //////////////////////validate_key////////////////////////
 void    BitcoinExchange::validate_key(std::string& key)
 {
-	// key = trim(key);
 	 if (key.find_first_not_of("-0123456789") != std::string::npos || key.size() > 10)
 		throw std::runtime_error("Invalid key");
 	if (key[4] != '-' || key[7]!= '-' || len(key, '-') != 2)
 		throw std::runtime_error("Invalid key");
-	// std::string year;
-	// std::string month;
-	// std::string day;
-	// try{
-		int year = validate_year_and_month(key.substr(0, key.find('-')), 'y');
-		int month = validate_year_and_month(key.substr(key.find('-') + 1, key.find_last_of('-')), 'm');
-		validate_day(key.substr(key.find_last_of('-') + 1), year, month);
-	// }
-	// catch(std::exception& e)
-	// {
-	// 	cout << "Exception: " << e.what() << endl;
-	// }
-	
+	int year = validate_year_and_month(key.substr(0, key.find('-')), 'y');
+	int month = validate_year_and_month(key.substr(key.find('-') + 1, key.find_last_of('-')), 'm');
+	validate_day(key.substr(key.find_last_of('-') + 1), year, month);
 }
 
 int	BitcoinExchange::validate_year_and_month(std::string line_parts, char flag)
@@ -248,7 +213,7 @@ void	BitcoinExchange::validate_day(std::string s_day, int year, int month)
 				throw std::runtime_error("Invalid day");
 		}
 		else if (day < 0 || day > 28)
-				throw std::runtime_error("Invalid day");
+			throw std::runtime_error("Invalid day");
 	}
 	ss.clear();//?
 }
@@ -257,10 +222,10 @@ void	BitcoinExchange::validate_day(std::string s_day, int year, int month)
 
 ///////////////////////utils_functions//////////////////////////////////
 std::string BitcoinExchange::trim(const std::string& str) {
-    size_t first = str.find_first_not_of(" \n\v\t");
+    size_t first = str.find_first_not_of(" \n\v\r\f\t");
     if (first == std::string::npos) return ""; // Если строка состоит только из пробелов
 
-    size_t last = str.find_last_not_of(" \t");
+    size_t last = str.find_last_not_of(" \n\v\r\f\t");
     return str.substr(first, last - first + 1);
 }
 
@@ -277,6 +242,6 @@ size_t BitcoinExchange::len(std::string str, char c)
 
 BitcoinExchange::~BitcoinExchange()
 {
-    cout << "BitcoinExchange dtor is called" << endl;
+    // cout << "BitcoinExchange dtor is called" << endl;
 	file.close();
 }
