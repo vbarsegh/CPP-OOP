@@ -1,16 +1,16 @@
 #include "Serializer.hpp"
 using std::cout;
 using std::endl;
-int main_a()
+int main()
 {
     Data data;
     data.num = 42;
     data.c = 'v';
 
     uintptr_t   data_in_uintptr;
-    Data        *newData = new Data;
-    newData->num = 442;
-    newData->c = 'c';
+    Data        *newData;
+    // newData->num = 442;
+    // newData->c = 'c';
     cout << "doooooooooooooo\n";
     cout << "this is data address->" << &data << endl;
     cout << "this is newData address->" << newData << endl;
@@ -31,12 +31,5 @@ int main_a()
     }
     else
         cout << "The Addresses don't match" << endl;
-    delete newData;
     return (1);
-}
-
-int main()
-{
-    main_a();
-    system("leaks reinterpret");
 }

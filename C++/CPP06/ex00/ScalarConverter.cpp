@@ -194,10 +194,10 @@ void	convert_char(const std::string& literal)
 void	convert_int(const std::string& literal)
 {
 	std::stringstream ss(literal);
-	long long num;
+	long double num;
 	ss >> num;
-	if (num > 127 || num < 0)
-		cout << "char: impossible" << endl;
+	if (num > 127.0 || num < 0.0)
+		cout << "char: impossiblEe" << endl;
 	else if (isprint(num))
 		cout << "char: " << static_cast<char>(num) << endl;
 	else

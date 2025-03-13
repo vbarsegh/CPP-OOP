@@ -31,7 +31,7 @@ void identify(Base* p)
     else if (obj_b)
         cout << "B is_a p" << endl;
     else if (obj_c)
-        cout << "C is_a p" << endl;
+        cout << "C is_a pp" << endl;
     else
         cout << "Unknown type" << endl;
 }

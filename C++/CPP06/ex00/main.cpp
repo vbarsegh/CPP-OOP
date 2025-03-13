@@ -1,5 +1,5 @@
 #include "ScalarConverter.hpp"
-
+#include <float.h>
 int main(int argc, char** argv)
 {
     if (argc != 2)
@@ -9,9 +9,10 @@ int main(int argc, char** argv)
     }
     else
     {   
-        (void)argv;
-        // double a = 2147483647.999999999999999999999999999999999;
-        // std::cout << "a = " << static_cast<int>(a) << "\n";
+        // (void)argv;
+        // double a = DBL_MAX;
+        
+        // std::cout << "a = " << std::fixed << static_cast<float>(a) << "\n";
         // float f = 12f;//compile chi linum
         // std::cout << "f = " << f << "\n";
         ScalarConverter::convert(argv[1]);
@@ -19,3 +20,4 @@ int main(int argc, char** argv)
         // std::cout << "nu = " <<nu << std::endl;
     }
 }
+

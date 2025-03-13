@@ -80,8 +80,6 @@ unsigned int Span::longestSpan()
     if (_current_elem_ind <= 1)
         throw CanNotFindlongestSpan();
     std::sort(_vec.begin(), _vec.end());
-    // for(size_t i = 0; i < _vec.size(); i++)
-    //     cout << " " << _vec.at(i) << " ";
     return (_vec[_vec.size() - 1] - _vec[0]);
 }
 

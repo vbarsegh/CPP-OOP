@@ -38,7 +38,6 @@ public:
 template <typename Iterator>
 void Span::TaddNumber(Iterator begin, Iterator end)
 {
-    cout << ",ds->"<<std::distance(begin, end) << endl;
     if (_current_elem_ind + std::distance(begin, end) >= _max_num_of_container)
         throw VectorWillBeFull();
     for (Iterator it = begin; it != end; it++)//!= vochte <
